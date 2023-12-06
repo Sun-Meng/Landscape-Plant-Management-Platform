@@ -1,3 +1,4 @@
+
 CREATE TABLE 监测设备 (  
     设备ID INT PRIMARY KEY,  
     监测时间 VARCHAR(255),  
