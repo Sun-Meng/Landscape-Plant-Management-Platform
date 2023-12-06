@@ -1,0 +1,34 @@
+CREATE TABLE 监测设备 (  
+    设备ID INT PRIMARY KEY,  
+    监测时间 VARCHAR(255),  
+    监测地点 VARCHAR(255),  
+    监测对象 VARCHAR(255)
+);   
+
+CREATE TABLE 监测指标 (  
+    指标ID INT PRIMARY KEY,  
+    创建人员 VARCHAR(255),  
+    创建时间 VARCHAR(255),
+    更新时间 VARCHAR(255),    
+    FOREIGN KEY (指标ID) REFERENCES 监测设备(设备ID)  
+);   
+
+CREATE TABLE 植物 (  
+    植物ID INT PRIMARY KEY,  
+    植物名称 VARCHAR(255),  
+    FOREIGN KEY (植物ID) REFERENCES 监测设备(设备ID)   
+);
+
+CREATE TABLE 人员 (  
+    人员ID INT PRIMARY KEY,  
+    监测人员 VARCHAR(255),  
+    FOREIGN KEY (人员ID) REFERENCES 监测设备(设备ID)   
+);
+
+CREATE TABLE 分析 (  
+    分析结果 INT PRIMARY KEY,  
+    指标ID INT,
+    植物ID INT,
+    FOREIGN KEY (指标ID) REFERENCES 监测指标(指标ID),  
+    FOREIGN KEY (植物ID) REFERENCES 植物(植物ID)  
+);  
