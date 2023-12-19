@@ -1,0 +1,64 @@
+CREATE TABLE Plants (
+    PlantID INT NOT NULL PRIMARY KEY ,
+    DiseaseName NVARCHAR(255),
+    Alias NVARCHAR(255),
+    MorphologicalFeatures NVARCHAR(255),
+    CultivationKeyPoints NVARCHAR(255),
+    ApplicationValue NVARCHAR(255),
+    PlantIntroduction TEXT,
+    Creator NVARCHAR(255),
+    CreationTime DATETIME NOT NULL ,
+    UpdateTime DATETIME NOT NULL 
+);
+
+-- 创建病虫害信息表
+CREATE TABLE PestInfo (
+    PestID INT NOT NULL PRIMARY KEY,
+    PestName NVARCHAR(255),
+    PreventionMethod NVARCHAR(255)
+);
+
+-- 创建防治表
+CREATE TABLE Prevent (
+    MeasureID INT NOT NULL PRIMARY KEY,
+    PlantID INT,
+    PestDiseaseID INT,
+    FOREIGN KEY (PlantID) REFERENCES Plants(PlantID),
+    FOREIGN KEY (PestDiseaseID) REFERENCES PestInfo(PestID)
+);
+
+-- 创建药物表
+CREATE TABLE Medicines (
+    MedicineID INT NOT NULL PRIMARY KEY,
+    MedicineName NVARCHAR(255),
+    ExpirationPeriod NVARCHAR(255)
+);
+
+-- 创建使用表
+CREATE TABLE Usage (
+    UsageID INT NOT NULL PRIMARY KEY,
+    Dosage NVARCHAR(255),
+    PestID INT,
+    MedicineID INT,
+    FOREIGN KEY (PestID) REFERENCES PestInfo(PestID),
+    FOREIGN KEY (MedicineID) REFERENCES Medicines(MedicineID)
+);
+
+
+-- 创建配图表
+CREATE TABLE Illustration (
+    IllustrationID INT NOT NULL PRIMARY KEY,
+    IllustrationDescription VARCHAR(255),
+    IllustrationName VARCHAR(255)
+);
+
+-- 创建拍摄表
+CREATE TABLE Shooting (
+    ShootingID INT NOT NULL PRIMARY KEY,
+    ShootingLocation NVARCHAR(255),
+    Photographer NVARCHAR(255),
+    PlantID INT,
+    IllustrationID INT,
+    FOREIGN KEY (PlantID) REFERENCES Plants(PlantID),
+    FOREIGN KEY (IllustrationID) REFERENCES Illustration(IllustrationID)
+);
