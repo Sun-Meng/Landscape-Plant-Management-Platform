@@ -9,7 +9,7 @@ class dao(metaclass=abc.ABCMeta):#接口@abc.abstractmethod#抽象方法
 class base_dao(dao):#具体实现类
     _conn = None
     def get_conn(c1s):
-        cls._conn = pymssql.connect(server="127.0.0.1"，database="education")
+        cls._conn = pymssql.connect(server="127.0.0.1",database="education")
         return cls._conn
-    def close_conn(c1s,conn)
+    def close_conn(c1s,conn):
         conn.close()
