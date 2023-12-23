@@ -3,7 +3,7 @@ sys.path.append("../..")
 
 import pandas as pd
 
-from db.domain.domain_S import *
+from db.domain.domain_X import *
 
 from db.Dao.dao_X import Monitor_dao, Monitoring_Equipment_dao, Monitoring_Personnel_dao
 
