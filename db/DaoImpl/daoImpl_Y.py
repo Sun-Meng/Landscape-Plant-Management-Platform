@@ -1,10 +1,9 @@
 import sys
-sys.path.append("..")
-from Dao.dao_Y import *
-from utils.Dao_base import *
-from domain.domain_Y import *
-from utils.Dao_base import *
-
+sys.path.append("../..")
+from db.Dao.dao_Y import *
+from db.utils.Dao_base import *
+from db.domain.domain_Y import *
+from db.utils.Dao_base import *
 class IllustrationDaoImpl(base_dao,IllustrationDao):
     def __init__(self):
         self.connection = self.get_conn() 
