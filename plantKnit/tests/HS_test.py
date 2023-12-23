@@ -1,6 +1,6 @@
 import sys
 sys.path.append("../..")
-from db.DaoImpl.daoImpl_X import Monitoring_Personnel_dao_Impl
+from db.DaoImpl.daolmpl_X import Monitoring_Personnel_dao_Impl
 
 
 dao=Monitoring_Personnel_dao_Impl()
