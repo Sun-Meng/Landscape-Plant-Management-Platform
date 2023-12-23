@@ -9,17 +9,13 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
     def insert(self,Monitor) :
         cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute()
-
+        cursor.execute("insert into Monitor values(%s,%s,%s,%s)",(diseaseID,name,create_time,update_time))
         self.connection.commit()
         cursor.close()
 
     def delete(self,Monitor):
         cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute()
-
+        cursor.execute("delete from Monitor where diseaseID=%s",(Monitor.diseaseID))
         self.connection.commit()
         cursor.close()
     
@@ -47,17 +43,13 @@ class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
 
     def insert(self,Monitoring_Equipment) :
         cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute()
-
+        cursor.execute("insert into Monitoring_Equipment values(%s,%s,%s,%s)",(id,time,place,object))
         self.connection.commit()
         cursor.close()
 
     def delete(self,Monitoring_Equipment):
         cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute()
-
+        cursor.execute("delete from Monitoring_Equipment where id=%s",(Monitoring_Equipment.id))
         self.connection.commit()
         cursor.close()
     
@@ -85,17 +77,13 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
 
     def insert(self,Monitoring_Personnel) :
         cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute()
-
+        cursor.execute("insert into Monitoring_Personnel values(%s,%s,%s,%s)",(id,name,sex,create_time,update_time,birth,tel))
         self.connection.commit()
         cursor.close()
 
     def delete(self,Monitoring_Personnel):
         cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute()
-
+        cursor.execute("delete from Monitoring_Personnel where id=%s",(Monitoring_Personnel.id))
         self.connection.commit()
         cursor.close()
     
