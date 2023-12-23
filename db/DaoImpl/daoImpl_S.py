@@ -1,11 +1,17 @@
+import sys
+sys.path.append("../..")
+
+import pandas as pd
+
+from db.domain.domain_S import *
 
 from db.Dao.dao_S import careJob_dao, careWorker_dao, plant_Family_dao, plant_Genus_dao, plant_Species_dao, plant_Zone_dao
 
-from db.utils.dao import base_dao
+from db.utils.dao import *
 
 class careJob_dao_Impl(base_dao,careJob_dao):
     
-    def _init__(self):
+    def __init__(self):
         self.connection = self.get_conn()
 
     def insert(self,CareJob) :
@@ -35,11 +41,21 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def select(self,sql):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute()
+        cursor.execute(sql)
 
         self.connection.commit()
         cursor.close()
-    
+
+    def select_all(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM CareJob")
+        results = cursor.fetchall()
+        print(pd.DataFrame(list(results)).shape)
+        # careJobs = []
+
+        # for result in results:
+        #    careJobs.append(CareJob(result[1], result[2], result[3], result[4], result[5], result[6],result[7]))
+        return results
 
 class careWorker_dao_Impl(base_dao,careWorker_dao):
     
@@ -70,13 +86,16 @@ class careWorker_dao_Impl(base_dao,careWorker_dao):
         self.connection.commit()
         cursor.close()
     
-    def select(self,sql) :
-        cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute()
+    # def select(self) :
+    #     cursor = self.connection.cursor()
+    #     #插入sql
+    #     cursor.execute()
 
-        self.connection.commit()
-        cursor.close()
+    #     self.connection.commit()
+    #     cursor.close()
+
+
+   
 
 class plant_Family_dao_Impl(base_dao,plant_Family_dao):
     

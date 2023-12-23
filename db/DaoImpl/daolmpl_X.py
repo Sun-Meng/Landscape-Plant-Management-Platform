@@ -1,4 +1,4 @@
-from dao import dao
+from utils.dao import dao
 
 class MonitorDao(dao):
     pass
