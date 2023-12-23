@@ -12,6 +12,6 @@ for job in Monitoring_Personnel:
     print("性别：", job[2])
     print("出生日期：", job[3])
     print("电话号码：", job[4])
-    print("创建时间：", job[3])
-    print("更新时间：", job[4])
+    print("创建时间：", job[5])
+    print("更新时间：", job[6])
     print()
