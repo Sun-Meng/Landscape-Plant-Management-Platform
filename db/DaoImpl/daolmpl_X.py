@@ -9,7 +9,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
     def insert(self,Monitor) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitor values(%s,%s,%s,%s)",(diseaseID,name,create_time,update_time))
+        cursor.execute("insert into Monitor values(%s,%s,%s,%s)",(Monitor.diseaseID,Monitor.name,Monitor.create_time,Monitor.update_time))
         self.connection.commit()
         cursor.close()
 
@@ -43,7 +43,7 @@ class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
 
     def insert(self,Monitoring_Equipment) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitoring_Equipment values(%s,%s,%s,%s)",(id,time,place,object))
+        cursor.execute("insert into Monitoring_Equipment values(%s,%s,%s,%s)",(Monitoring_Equipment.id,Monitoring_Equipment.time,Monitoring_Equipment.place,Monitoring_Equipment.object))
         self.connection.commit()
         cursor.close()
 
@@ -77,7 +77,7 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
 
     def insert(self,Monitoring_Personnel) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitoring_Personnel values(%s,%s,%s,%s)",(id,name,sex,create_time,update_time,birth,tel))
+        cursor.execute("insert into Monitoring_Personnel values(%s,%s,%s,%s)",(Monitoring_Personnel.id,Monitoring_Personnel.name,Monitoring_Personnel.sex,Monitoring_Personnel.create_time,Monitoring_Personnel.update_time,Monitoring_Personnel.birth,Monitoring_Personnel.tel))
         self.connection.commit()
         cursor.close()
 
