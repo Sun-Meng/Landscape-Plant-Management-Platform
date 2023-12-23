@@ -71,7 +71,7 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
 
     def insert(self,Monitoring_Personnel) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitoring_Personnel values(%s,%s,%s,%s)",(Monitoring_Personnel.id,Monitoring_Personnel.name,Monitoring_Personnel.sex,Monitoring_Personnel.create_time,Monitoring_Personnel.update_time,Monitoring_Personnel.birth,Monitoring_Personnel.tel))
+        cursor.execute("insert into Monitoring_Personnel values(%s,%s,%s,%s,%s,%s,%s)",(Monitoring_Personnel.id,Monitoring_Personnel.name,Monitoring_Personnel.sex,Monitoring_Personnel.create_time,Monitoring_Personnel.update_time,Monitoring_Personnel.birth,Monitoring_Personnel.tel))
         self.connection.commit()
         cursor.close()
 
