@@ -1,4 +1,4 @@
-from utils.dao import dao
+from dao import dao
 
 class IllustrationDao(dao):
     pass
