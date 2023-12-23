@@ -66,3 +66,8 @@ class Monitoring_Personnel(object):
     
     def get_tel(self):
         return self.tel
+    
+    def checkCareJob(ID,job):
+        #需要连接 养护任务表 和 养护人信息表
+        job.set_workerID()
+        #养护人员只提供workerID

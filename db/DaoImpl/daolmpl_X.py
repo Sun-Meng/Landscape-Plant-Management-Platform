@@ -100,3 +100,10 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
         result = cursor.fetchall()
         cursor.close()
         return result
+    
+    def select_all(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM Monitoring_Personnel")
+        results = cursor.fetchall()
+        print(pd.DataFrame(list(results)).shape)
+        return results
