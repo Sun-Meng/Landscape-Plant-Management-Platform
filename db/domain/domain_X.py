@@ -1,4 +1,4 @@
-class Monitor:
+class Monitor(object):
     def __init__(self, diseaseID, name, create_time, update_time):
         self.diseaseID = diseaseID
         self.name = name
@@ -17,7 +17,7 @@ class Monitor:
     def get_update_time(self):
         return self.update_time
 
-class Monitoring_Equipment:
+class Monitoring_Equipment(object):
     def __init__(self, id, time, place, object):
         self.id = id
         self.time = time
@@ -36,7 +36,7 @@ class Monitoring_Equipment:
     def get_object(self):
         return self.object
         
-class Monitoring_Personnel:
+class Monitoring_Personnel(object):
     def __init__(self, id, name, sex, create_time, update_time, birth,tel):
         self.id = id
         self.name = name
