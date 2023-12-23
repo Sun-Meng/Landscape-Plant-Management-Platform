@@ -42,20 +42,38 @@ class careJob_dao_Impl(base_dao,careJob_dao):
         cursor = self.connection.cursor()
         #插入sql
         cursor.execute(sql)
-
-        self.connection.commit()
-        cursor.close()
-
-    def select_all(self):
-        cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM CareJob")
         results = cursor.fetchall()
-        print(pd.DataFrame(list(results)).shape)
-        # careJobs = []
-
-        # for result in results:
-        #    careJobs.append(CareJob(result[1], result[2], result[3], result[4], result[5], result[6],result[7]))
+        print(pd.DataFrame(list(results)).shape)    #用于验证是否成功读入数据库内容
+        # self.connection.commit()
+        cursor.close()
         return results
+    
+    def select_by_id(self,id):
+        cursor = self.connection.cursor()
+        cursor.execute(("SELECT JobID,JobTitle,date,location,worker_name,Alias,result FROM CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID innerjoin Plants as p on p.PlantID=job.PlantID WHERE =?", (id,)))
+        results = cursor.fetchall()
+        print(pd.DataFrame(list(results)).shape)    #用于验证是否成功读入数据库内容
+        cursor.close()
+        return results
+    
+#   只返回 养护结果
+    # def select_caring_result(self):
+    #     cursor = self.connection.cursor()
+    #     sql='''
+    #         SELECT JobID,JobTitle,worker_name,result 
+    #         FROM CareJob as job inner join Gardener as gd on job.workerID=gd.workerID
+    #     '''
+    #     cursor.execute(sql)
+    #     results = cursor.fetchall()
+    #     return results
+
+    # def select_all(self):
+    #     cursor = self.connection.cursor()
+    #     cursor.execute("SELECT * FROM CareJob")
+    #     results = cursor.fetchall()
+    #     print(pd.DataFrame(list(results)).shape)#用于验证是否成功读入数据库内容
+
+    #     return results
 
 class careWorker_dao_Impl(base_dao,careWorker_dao):
     
