@@ -18,14 +18,14 @@ class Monitor(object):
         return self.update_time
 
 class Monitoring_Equipment(object):
-    def __init__(self, id, time, place, object):
-        self.id = id
+    def __init__(self, equipmentID, time, place, object):
+        self.equipmentID = equipmentID
         self.time = time
         self.place = place
         self.object = object
         
-    def get_id(self):
-        return self.id
+    def get_equipmentID(self):
+        return self.equipmentID
     
     def get_time(self):
         return self.time
@@ -37,8 +37,8 @@ class Monitoring_Equipment(object):
         return self.object
         
 class Monitoring_Personnel(object):
-    def __init__(self, id, name, sex, create_time, update_time, birth,tel):
-        self.id = id
+    def __init__(self, personID, name, sex, create_time, update_time, birth,tel):
+        self.personID = personID
         self.name = name
         self.sex = sex
         self.create_time = create_time
@@ -46,8 +46,8 @@ class Monitoring_Personnel(object):
         self.birth = birth
         self.tel = tel
     
-    def get_id(self):
-        return self.id
+    def get_personID(self):
+        return self.personID
     
     def get_name(self):
         return self.name
