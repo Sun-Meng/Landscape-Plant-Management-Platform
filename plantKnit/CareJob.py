@@ -1,15 +1,18 @@
 class CareJob(object):
-    def __init__(self, ID, Name, Date, Location,Content,Result):
-        self.__ID = ID
+    def __init__(self, JobID,WorkerID,Name, Date, Location,Content,Result):
+        self.__JobID = JobID
         self.__Name = Name
         self.__Date = Date
         self.__Location = Location
         self.__Content=Content
         self.__Result=Result
     
-    def get_ID(self):
-        return self.__ID
-
+    def get_JobID(self):
+        return self.__JobID
+    
+    def get_WorkerID(self):
+        return self.__WorkerID
+    
     def get_Name(self):
         return self.__Name
     

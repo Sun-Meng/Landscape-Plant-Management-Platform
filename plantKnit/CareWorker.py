@@ -1,3 +1,4 @@
+import CareJob
 class CareWorker(object):
     def __init__(self, ID, Name, Sex, Age, Tel):
         self.__ID = ID
@@ -21,7 +22,7 @@ class CareWorker(object):
     def get_Tel(self):
         return self.__Tel
     
-    def checkCareJob(self):
+    def checkCareJob(ID,job):
         #需要连接 养护任务表 和 养护人信息表
-        #这里直接return(先import CareJob.py)
-        #呈现的为实体，还没有联系到表的连接上
+        job.set_workerID()
+        #养护人员只提供workerID
