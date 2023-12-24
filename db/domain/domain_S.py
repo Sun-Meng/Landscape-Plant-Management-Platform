@@ -1,41 +1,20 @@
 class CareJob(object):
-    def __init__(self, JobID,WorkerID,Name, Date, Location,Content,Result):
+    def __init__(self, JobID,WorkerID,Name, Date, Location,RegularJob,Result):
         self.__JobID = JobID
         self.__WorkerID = WorkerID
         self.__Name = Name
         self.__Date = Date
         self.__Location = Location
-        self.__Content=Content
+        self.__RegularJob=RegularJob
         self.__Result=Result
-    
-    def get_JobID(self):
-        return self.__JobID
-    
-    def get_WorkerID(self):
-        return self.__WorkerID
-    
-    def get_Name(self):
-        return self.__Name
-    
-    def get_Date(self):
-        return self.__Date
-    
-    def get_Location(self):
-        return self.__Location
-    
-    def get_Content(self):
-        return self.__Content
-    
-    def get_Result(self):
-        return self.__Result
 
 
 class CareWorker(object):
-    def __init__(self, ID, Name, Sex, Age, Tel):
+    def __init__(self, ID, Name, Sex, Birth, Tel):
         self.__ID = ID
         self.__Name = Name
         self.__Sex = Sex
-        self.__Age = Age
+        self.__Birth = Birth
         self.__Tel = Tel
 
     def get_ID(self):
@@ -54,31 +33,31 @@ class CareWorker(object):
         return self.__Tel
     
 
-class Plant_Family(object):
+class PlantFamily(object):
      def __init__(self, PlantID, id,name,info):
         self.__PlantID = PlantID
         self.__id=id
         self.__name=name
-        self.__name = name
+        self.__info = info
 
 
-class Plant_Genus(object):
+class PlantGenus(object):
      def __init__(self, PlantID, id,name,info):
         self.__PlantID = PlantID
         self.__id=id
         self.__name=name
-        self.__name = name
+        self.__info = info
 
 
-class Plant_Species(object):
+class PlantSpecies(object):
     def __init__(self, PlantID, id,name,info):
         self.__PlantID = PlantID
         self.__id=id
         self.__name=name
-        self.__name = name
+        self.__info = info
         
 
-class Plant_Zone(object):
+class PlantZone(object):
     def __init__(self, PlantID,ZoneID, Prov, City, County, create_time,modified_time):
         self.__PlantID = PlantID
         self.__ZoneID = ZoneID
