@@ -1,8 +1,8 @@
-import pandas as pd
 import sys
 import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append("../..")
+import pandas as pd
 from db.DaoImpl.daoImpl_X import Monitor_dao_Impl, Monitoring_Equipment_dao_Impl, Monitoring_Personnel_dao_Impl
 from db.domain.domain_X import Monitoring_Personnel
 
@@ -16,8 +16,6 @@ def import_csv_to_database(csv_path):
     personnel_dao = Monitoring_Personnel_dao_Impl()
 
     for index, row in data.iterrows():
-        # 在这里，根据您的数据列名调整插入的字段
-        # 这里假设 CSV 文件的列名与 Monitoring_Personnel 的属性相对应
         personnel = Monitoring_Personnel(
             personID=row['personID'],
             name=row['name'],
@@ -34,6 +32,7 @@ def import_csv_to_database(csv_path):
     print("CSV文件导入数据库成功")
 
 if __name__ == "__main__":
-    # 替换成您的实际文件路径
-    csv_path = os.path.join(os.path.dirname(__file__), "..", "docs", "HS.csv")
+    # 使用 os.path.join 构建文件路径
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(current_directory, "..", "docs", "HS.csv")
     import_csv_to_database(csv_path)
