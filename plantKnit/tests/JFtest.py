@@ -3,7 +3,7 @@ sys.path.append("../..")
 from db.utils.dao import *
 from db.domain.domain_Y import *
 from db.DaoImpl.daoImpl_Y import *
-a=IllustrationDaoImpl
+a=IllustrationDaoImpl()
 IllustrationID="001"
 IllustrationDescription="good"
 IllustrationName="ins_1"
