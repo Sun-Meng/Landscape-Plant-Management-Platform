@@ -28,8 +28,7 @@ class CareJob(object):
     
     def get_Result(self):
         return self.__Result
-    
-    #任务导入的时候就可以先完成【表连接】操作，这样直接读入的就是任务内容，根据条件进行筛选即可
+
 
 class CareWorker(object):
     def __init__(self, ID, Name, Sex, Age, Tel):
@@ -54,7 +53,37 @@ class CareWorker(object):
     def get_Tel(self):
         return self.__Tel
     
-    def checkCareJob(ID,job):
-        #需要连接 养护任务表 和 养护人信息表
-        job.set_workerID()
-        #养护人员只提供workerID
+
+class Plant_Family(object):
+     def __init__(self, PlantID, id,name,info):
+        self.__PlantID = PlantID
+        self.__id=id
+        self.__name=name
+        self.__name = name
+
+
+class Plant_Genus(object):
+     def __init__(self, PlantID, id,name,info):
+        self.__PlantID = PlantID
+        self.__id=id
+        self.__name=name
+        self.__name = name
+
+
+class Plant_Species(object):
+    def __init__(self, PlantID, id,name,info):
+        self.__PlantID = PlantID
+        self.__id=id
+        self.__name=name
+        self.__name = name
+        
+
+class Plant_Zone(object):
+    def __init__(self, PlantID,ZoneID, Prov, City, County, create_time,modified_time):
+        self.__PlantID = PlantID
+        self.__ZoneID = ZoneID
+        self.__Prov = Prov
+        self.__City = City
+        self.__County = County
+        self.__create_time = create_time
+        self.__modified_time=modified_time
