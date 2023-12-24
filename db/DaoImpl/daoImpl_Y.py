@@ -3,12 +3,12 @@ sys.path.append("../..")
 from db.Dao.dao_Y import *
 from db.utils.dao import *
 from db.domain.domain_Y import *
-from db.utils.dao import *
 class IllustrationDaoImpl(base_dao,IllustrationDao):
     def __init__(self):
-        self.connection = self.get_conn() 
-       
-    def insert(self, Illustration) -> bool:
+        self.conn = self.get_conn() 
+        self.cursor = self.connection.cursor()
+    
+    def insert(self, Illustration:Illustration) -> bool:
         try:
             cursor = self.connection.cursor()
             cursor.execute ("INSERT INTO Illustration VALUES (?, ?, ?)",
@@ -260,6 +260,14 @@ class PlantsDaoImpl(base_dao, PlantsDao):
             return Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8])
         else:
             return None
+        
+    def selectAll(self):
+        self.cursor.execute("SELECT * FROM Plants")
+        results = self.cursor.fetchone()
+        simple_informations = []
+        for result in results:
+            simple_informations.append(Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8]))
+        return simple_informations
 
         
 class ShootingDaoImpl(base_dao, ShootingDao):
