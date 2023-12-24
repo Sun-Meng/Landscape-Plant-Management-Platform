@@ -16,13 +16,13 @@ def import_csv_to_database(csv_filename):
 
     for index, row in data.iterrows():
         personnel = Monitoring_Personnel(
-            row['personID'],
-            row['name'],
-            row['sex'],
-            row['create_time'],
-            row['update_time'],
-            row['birth'],
-            row['tel']
+            row.tolist()[0],  # personID
+            row.tolist()[1],  # name
+            row.tolist()[2],  # sex
+            row.tolist()[5],  # create_time
+            row.tolist()[6],  # update_time
+            row.tolist()[3],  # birth
+            row.tolist()[4]   # tel
         )
         personnel_dao.insert(personnel)
 
@@ -31,4 +31,5 @@ def import_csv_to_database(csv_filename):
 if __name__ == "__main__":
     # 从终端获取用户输入的 CSV 文件名
     csv_filename = input("请输入要导入的CSV文件的名称（包括文件扩展名）：")
+
     import_csv_to_database(csv_filename)
