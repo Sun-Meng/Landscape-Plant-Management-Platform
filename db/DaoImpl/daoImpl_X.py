@@ -11,7 +11,7 @@ from db.utils.dao import *
 
 class Monitor_dao_Impl(base_dao,Monitor_dao):
     
-    def _init__(self):
+    def __init__(self):
         self.connection = self.get_conn()
 
     def insert(self,Monitor) :
@@ -42,7 +42,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
 class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
     
-    def _init__(self):
+    def __init__(self):
         self.connection = self.get_conn()
 
     def insert(self,Monitoring_Equipment) :
@@ -73,7 +73,7 @@ class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
 
 class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
     
-    def _init__(self):
+    def __init__(self):
         self.connection = self.get_conn()
 
     def insert(self,Monitoring_Personnel) :
