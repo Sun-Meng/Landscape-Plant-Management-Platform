@@ -17,8 +17,8 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def insert(self,CareJob) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("INSERT INTO CareJob VALUES (%s, %s, %s,%s,%s,%s,%s)",
-                                (CareJob.JobID, CareJob.WorkerID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result))
+        cursor.execute("INSERT INTO CareJob VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)",
+                                (CareJob.JobID, CareJob.WorkerID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.create_time,CareJob.modified_time))
         #self.connection.commit()
         cursor.close()
 
@@ -32,8 +32,8 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def update(self,CareJob):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE CareJob SET JobID=%s, WorkerID=%s, Name=%s,Date=%s,Location=%s,RegularJob=%s,Result=%s",
-                                (CareJob.JobID, CareJob.WorkerID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result))
+        cursor.execute("UPDATE CareJob SET JobID=%s, WorkerID=%s, Name=%s,Date=%s,Location=%s,RegularJob=%s,Result=%s,modified_time=%s",
+                                (CareJob.JobID, CareJob.WorkerID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.modified_time))
         # self.conn.commit()
         cursor.close()
 
@@ -49,7 +49,7 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     
     def select_by_id(self,id):
         cursor = self.connection.cursor()
-        cursor.execute(("SELECT JobID,JobTitle,date,location,worker_name,Alias,result FROM CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID innerjoin Plants as p on p.PlantID=job.PlantID WHERE =%s", (id,)))
+        cursor.execute(("SELECT JobID,JobTitle,date,location,worker_name,Alias,result FROM CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID inner join Plants as p on p.PlantID=job.PlantID WHERE =%s", (id,)))
         results = cursor.fetchall()
         print(pd.DataFrame(list(results)).shape)    #用于验证是否成功读入数据库内容
         cursor.close()
@@ -82,15 +82,15 @@ class careWorker_dao_Impl(base_dao,careWorker_dao):
     def insert(self,CareWorker):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("INSERT INTO CareWorker VALUES (%s, %s, %s,%s,%s)",
-                                (CareWorker.WorkerID,CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel))
+        cursor.execute("INSERT INTO CareWorker VALUES (%s, %s, %s,%s,%s,%s,%s)",
+                                (CareWorker.WorkerID,CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.create_time,CareWorker.modified_time))
         #self.connection.commit()
         cursor.close()
     
     def update(self,CareWorker) :
         cursor = self.connection.cursor()
-        cursor.execute("UPDATE CareWorker SET WorkerID=%s, Name=%s,Sex=%s,Birth=%s,Tel=%s",
-                                (CareJob.WorkerID, CareJob.Name,CareJob.Sex,CareJob.Birth,CareJob.Tel))
+        cursor.execute("UPDATE CareWorker SET WorkerID=%s, Name=%s,Sex=%s,Birth=%s,Tel=%s,modified_time=%s",
+                                (CareWorker.WorkerID, CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.modified_time))
         #self.connection.commit()
         cursor.close()
    
@@ -211,16 +211,16 @@ class plant_Species_dao_Impl(base_dao,plant_Species_dao):
 class plant_Zone_dao_Impl(base_dao,plant_Zone_dao):
     def insert(self,PlantZone):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO Plant_Zone VALUES (%s, %s, %s,%s)",
-                                (PlantZone.PlantID, PlantZone.id, PlantZone.name,PlantZone.info))
+        cursor.execute("INSERT INTO Plant_Zone VALUES (%s, %s, %s,%s, %s,%s)",
+                                (PlantZone.PlantID, PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.create_time,PlantZone.modified_time))
         #self.connection.commit()
         cursor.close()
     
     def update(self,PlantZone) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE Plant_Zone SET PlantID=%s, id=%s, name=%s,info=%s",
-                                (PlantZone.PlantID, PlantZone.id, PlantZone.name,PlantZone.info))
+        cursor.execute("UPDATE Plant_Zone SET PlantID=%s, id=%s, name=%s,info=%s,modified_time=%s",
+                                (PlantZone.PlantID, PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.modified_time))
 
         #self.connection.commit()
         cursor.close()
