@@ -9,12 +9,9 @@ from db.domain.domain_X import Monitoring_Personnel
 def import_csv_to_database(csv_path):
     # 读取 CSV 文件
     data = pd.read_csv(csv_path,sep=',')
-
-    # 使用数据库操作类进行数据库插入操作
     monitor_dao = Monitor_dao_Impl()
     equipment_dao = Monitoring_Equipment_dao_Impl()
     personnel_dao = Monitoring_Personnel_dao_Impl()
-
     for index, row in data.iterrows():
         personnel = Monitoring_Personnel(
             personID=row['personID'],
@@ -25,10 +22,7 @@ def import_csv_to_database(csv_path):
             birth=row['birth'],
             tel=row['tel']
         )
-
-        # 执行插入操作
         personnel_dao.insert(personnel)
-
     print("CSV文件导入数据库成功")
 
 if __name__ == "__main__":
