@@ -51,7 +51,11 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def select_workerName(self,id):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("select worker_name from CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID ")
+        cursor.execute(
+            '''
+                select worker_name 
+                from CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID 
+            ''')
         workerName = cursor.fetchone()
 
         # self.connection.commit()
@@ -61,8 +65,14 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def select_by_id(self,id):
         cursor = self.connection.cursor()
         cursor.execute(
-            ("SELECT JobID,JobTitle,date,location,worker_name,Name,result FROM CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID inner join Plants as p on p.PlantID=job.PlantID WHERE job.workerID=%s",
-              (id,)))
+            ('''
+                SELECT JobID,JobTitle,date,location,Name,PestName,HealthStatus,RegularJob,result 
+                FROM CareWorker as wk 
+                    inner join CareJob as job on job.workerID=wk.workerID 
+                    inner join Plants as p on p.PlantID=job.PlantID 
+                    inner join Monitor as m on m.PlantID=p.PlantID 
+                WHERE job.workerID=%s
+             ''',(id,)))
         results = cursor.fetchall()
         print(pd.DataFrame(list(results)).shape)    #用于验证是否成功读入数据库内容
         cursor.close()
