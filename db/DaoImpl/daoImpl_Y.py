@@ -10,9 +10,10 @@ class IllustrationDaoImpl(base_dao,IllustrationDao):
     
     def insert(self, Illustration:Illustration) -> bool:
         try:
-            self.cursor.execute ("INSERT INTO Illustration VALUES (?, ?, ?)",
+            cursor = self.connection.cursor()
+            cursor.execute ("INSERT INTO Illustration VALUES (?, ?, ?)",
                                 (Illustration.IllustrationID, Illustration.IllustrationDescription, Illustration.IllustrationName))
-            self.conn.commit()
+            # self.connection.commit()
             return True
         except Exception as e:
             print(e)
@@ -20,26 +21,29 @@ class IllustrationDaoImpl(base_dao,IllustrationDao):
         
     def delete(self,IllustrationID) -> bool:
         try:
-            self.cursor.execute("DELETE FROM Illustration WHERE IllustrationID=?", (IllustrationID,))
-            self.conn.commit()
+            cursor = self.connection.cursor()
+            cursor.execute("DELETE FROM Illustration WHERE IllustrationID=?", (IllustrationID,))
+            # self.conn.commit()
             return True
         except Exception as e:
             print(e)
             return False
 
-    def update(self, Illustration:Illustration) -> bool:
+    def update(self, Illustration) -> bool:
         try:
-            self.cursor.execute("UPDATE Illustration SET IllustrationID=?, IllustrationDescription=?, IllustrationName=?",
+            cursor = self.connection.cursor()
+            cursor.execute("UPDATE Illustration SET IllustrationID=?, IllustrationDescription=?, IllustrationName=?",
                                 (Illustration.IllustrationID, Illustration.IllustrationDescription,  Illustration.IllustrationName))
-            self.conn.commit()
+            # self.conn.commit()
             return True
         except Exception as e:
             print(e)
             return False
 
     def select(self, IllustrationID):
-        self.cursor.execute("SELECT * FROM Illustration WHERE IllustrationID=?", (IllustrationID,))
-        result = self.cursor.fetchone()
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM Illustration WHERE IllustrationID=?", (IllustrationID,))
+        result = cursor.fetchone()
         if result:
             return Illustration(result[0], result[1], result[2])
         else:
