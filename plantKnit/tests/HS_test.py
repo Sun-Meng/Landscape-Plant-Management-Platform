@@ -1,11 +1,10 @@
 import sys
 #GPT修改
-import os
+#import os
 # 将当前工作目录设置为项目根目录
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+#os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # 添加项目根目录到 Python 路径
-sys.path.append(os.path.abspath(".."))
-#
+#sys.path.append(os.path.abspath(".."))
 sys.path.append("../..")
 from db.DaoImpl.daoImpl_X import Monitoring_Personnel_dao_Impl
 
