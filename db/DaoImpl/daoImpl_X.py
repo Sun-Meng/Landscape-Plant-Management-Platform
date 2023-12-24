@@ -94,10 +94,11 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
         self.connection.commit()
         cursor.close()
 
-    def select(self,sql):
+    def select(self):
         cursor = self.connection.cursor()
-        cursor.execute(sql)
+        cursor.execute("SELECT * FROM Monitoring_Personnel WHERE personID = 1000")#里面加入, (Monitoring_Personnel.personID)
         result = cursor.fetchall()
+        print(pd.DataFrame(list(result)).shape)
         cursor.close()
         return result
     
@@ -106,4 +107,5 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
         cursor.execute("SELECT * FROM Monitoring_Personnel")
         results = cursor.fetchall()
         print(pd.DataFrame(list(results)).shape)
+        cursor.close()
         return results
