@@ -1,5 +1,5 @@
 class CareJob(object):
-    def __init__(self, JobID,WorkerID,Name, Date, Location,RegularJob,Result):
+    def __init__(self, JobID,WorkerID,Name, Date, Location,RegularJob,Result,create_time,modified_time):
         self.__JobID = JobID
         self.__WorkerID = WorkerID
         self.__Name = Name
@@ -7,30 +7,20 @@ class CareJob(object):
         self.__Location = Location
         self.__RegularJob=RegularJob
         self.__Result=Result
+        self.__create_time = create_time
+        self.__modified_time=modified_time
 
 
 class CareWorker(object):
-    def __init__(self, ID, Name, Sex, Birth, Tel):
+    def __init__(self, ID, Name, Sex, Birth, Tel,create_time,modified_time):
         self.__ID = ID
         self.__Name = Name
         self.__Sex = Sex
         self.__Birth = Birth
         self.__Tel = Tel
+        self.__create_time = create_time
+        self.__modified_time=modified_time
 
-    def get_ID(self):
-        return self.__ID
-
-    def get_Name(self):
-        return self.__Name
-
-    def get_Sex(self):
-        return self.__Sex
-    
-    def get_Age(self):
-        return self.__Age
-    
-    def get_Tel(self):
-        return self.__Tel
     
 
 class PlantFamily(object):
