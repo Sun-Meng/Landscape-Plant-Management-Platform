@@ -16,13 +16,13 @@ def import_csv_to_database(csv_filename):
 
     for index, row in data.iterrows():
         personnel = Monitoring_Personnel(
-            personID=row['personID'],
-            name=row['name'],
-            sex=row['sex'],
-            create_time=row['create_time'],
-            update_time=row['update_time'],
-            birth=row['birth'],
-            tel=row['tel']
+            row['personID'],
+            row['name'],
+            row['sex'],
+            row['create_time'],
+            row['update_time'],
+            row['birth'],
+            row['tel']
         )
         personnel_dao.insert(personnel)
 
