@@ -41,14 +41,19 @@ class PestInfo:
         print(vars(self))
 
 class Plants:
-    def __init__(self, PlantID, Alias, MorphologicalFeatures, CultivationKeyPoints, ApplicationValue, PlantIntroduction, Creator, CreationTime, UpdateTime):
+    def __init__(self, PlantID, Name,Alias, MorphologicalFeatures, CultivationKeyPoints, ApplicationValue, PlantIntroduction, Creator, FamilyID,GenusID,SpeciesID,ZoneID,CreationTime, UpdateTime):
         self.PlantID = PlantID
+        self.Name=Name
         self.Alias = Alias
         self.MorphologicalFeatures = MorphologicalFeatures
         self.CultivationKeyPoints = CultivationKeyPoints
         self.ApplicationValue = ApplicationValue
         self.PlantIntroduction = PlantIntroduction
         self.Creator = Creator
+        self.FamilyID=FamilyID
+        self.GenusID=GenusID
+        self.SpeciesID=SpeciesID
+        self.ZoneID=ZoneID
         self.CreationTime = CreationTime
         self.UpdateTime = UpdateTime
     def output(self):
