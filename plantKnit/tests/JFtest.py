@@ -1,6 +1,6 @@
 import sys
 sys.path.append("../..")
-from db.utils.Dao_base import *
+from db.utils.dao import *
 from db.domain.domain_Y import *
 from db.DaoImpl.daoImpl_Y import *
 
