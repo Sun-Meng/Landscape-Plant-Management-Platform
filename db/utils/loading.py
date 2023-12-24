@@ -14,16 +14,15 @@ def import_csv_to_database(csv_filename):
     equipment_dao = Monitoring_Equipment_dao_Impl()
     personnel_dao = Monitoring_Personnel_dao_Impl()
 
-    for index, row in data.iterrows():
-        personnel = Monitoring_Personnel(
-            personID=row['personID'],
-            name=row['name'],
-            sex=row['sex'],
-            create_time=row['create_time'],
-            update_time=row['update_time'],
-            birth=row['birth'],
-            tel=row['tel']
-        )
+    for _, row in data.iterrows():
+        # 将 Pandas DataFrame 中的行数据转换为列表
+        list = row.tolist()
+
+        personnel_data = []
+        for item in list:
+            personnel_data.append(item)
+
+        personnel = Monitoring_Personnel(*personnel_data)
         personnel_dao.insert(personnel)
 
     print(f"CSV文件 '{csv_filename}' 导入数据库成功")
@@ -31,4 +30,5 @@ def import_csv_to_database(csv_filename):
 if __name__ == "__main__":
     # 从终端获取用户输入的 CSV 文件名
     csv_filename = input("请输入要导入的CSV文件的名称（包括文件扩展名）：")
+
     import_csv_to_database(csv_filename)
