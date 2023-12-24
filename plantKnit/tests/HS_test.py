@@ -6,7 +6,7 @@ sys.path.append("../..")
 from db.DaoImpl.daoImpl_X import Monitoring_Personnel_dao_Impl
 
 dao=Monitoring_Personnel_dao_Impl()
-Monitoring_Personnel=dao.select_all()
+Monitoring_Personnel=dao.select()
 
 for job in Monitoring_Personnel:
     print("personID:", job[0])
