@@ -16,8 +16,9 @@ class 管理员(object):
             print(vars(temp))
         else:print("id有误")
     def 查看所有植物信息(self):
-        
-
+        temp=self.plants.select_all()
+        for i in temp:
+            print(vars(i))
 
 
 
