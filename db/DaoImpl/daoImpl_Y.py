@@ -5,8 +5,7 @@ from db.utils.dao import *
 from db.domain.domain_Y import *
 class IllustrationDaoImpl(base_dao,IllustrationDao):
     def __init__(self):
-        self.conn = self.get_conn() 
-        self.cursor = self.connection.cursor()
+        self.connection = self.get_conn()
     
     def insert(self, Illustration:Illustration) -> bool:
         try:
