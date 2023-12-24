@@ -14,19 +14,15 @@ def import_csv_to_database(csv_filename):
     equipment_dao = Monitoring_Equipment_dao_Impl()
     personnel_dao = Monitoring_Personnel_dao_Impl()
 
-    for index, row in data.iterrows():
+    for _, row in data.iterrows():
         # 将 Pandas DataFrame 中的行数据转换为列表
         list = row.tolist()
 
-        personnel = Monitoring_Personnel(
-            list[0],  # personID
-            list[1],  # name
-            list[2],  # sex
-            list[3],  # birth
-            list[4],  # tel
-            list[5],  # create_time
-            list[6]   # update_time
-        )
+        personnel_data = []
+        for item in list:
+            personnel_data.append(item)
+
+        personnel = Monitoring_Personnel(*personnel_data)
         personnel_dao.insert(personnel)
 
     print(f"CSV文件 '{csv_filename}' 导入数据库成功")
