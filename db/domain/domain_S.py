@@ -1,6 +1,7 @@
 class CareJob(object):
     def __init__(self, JobID,WorkerID,Name, Date, Location,Content,Result):
         self.__JobID = JobID
+        self.__WorkerID = WorkerID
         self.__Name = Name
         self.__Date = Date
         self.__Location = Location
