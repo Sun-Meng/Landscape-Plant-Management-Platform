@@ -1,6 +1,5 @@
 import sys
 import os
-# 将当前工作目录设置为项目根目录
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append("../..")
 from db.DaoImpl.daoImpl_X import Monitoring_Personnel_dao_Impl
