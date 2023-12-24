@@ -37,14 +37,15 @@ class Monitoring_Equipment(object):
         return self.object
         
 class Monitoring_Personnel(object):
-    def __init__(self, personID, name, sex, create_time, update_time, birth,tel):
-        self.personID = personID
-        self.name = name
-        self.sex = sex
-        self.create_time = create_time
-        self.update_time = update_time
-        self.birth = birth
-        self.tel = tel
+    def __init__(self, personID, name, sex, birth, tel, create_time, update_time):
+        self.personID = str(personID)
+        self.name = str(name)
+        self.sex = str(sex)
+        self.birth = str(birth)
+        self.tel = str(tel)
+        self.create_time = str(create_time)
+        self.update_time = str(update_time)
+
     
     def get_personID(self):
         return self.personID
