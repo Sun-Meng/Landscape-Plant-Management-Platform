@@ -24,32 +24,28 @@ class CareWorker(object):
     
 
 class PlantFamily(object):
-     def __init__(self, PlantID, id,name,info):
-        self.__PlantID = PlantID
+     def __init__(self, id,name,info):
         self.__id=id
         self.__name=name
         self.__info = info
 
 
 class PlantGenus(object):
-     def __init__(self, PlantID, id,name,info):
-        self.__PlantID = PlantID
+     def __init__(self, id,name,info):
         self.__id=id
         self.__name=name
         self.__info = info
 
 
 class PlantSpecies(object):
-    def __init__(self, PlantID, id,name,info):
-        self.__PlantID = PlantID
+    def __init__(self, id,name,info):
         self.__id=id
         self.__name=name
         self.__info = info
         
 
 class PlantZone(object):
-    def __init__(self, PlantID,ZoneID, Prov, City, County, create_time,modified_time):
-        self.__PlantID = PlantID
+    def __init__(self,ZoneID, Prov, City, County, create_time,modified_time):
         self.__ZoneID = ZoneID
         self.__Prov = Prov
         self.__City = City

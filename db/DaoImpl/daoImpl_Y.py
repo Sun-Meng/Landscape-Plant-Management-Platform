@@ -1,3 +1,4 @@
+from datetime import datetime
 import sys
 sys.path.append("../..")
 from db.Dao.dao_Y import *
@@ -225,8 +226,8 @@ class PlantsDaoImpl(base_dao, PlantsDao):
 
     def insert(self, plant: Plants) -> bool:
         try:
-            self.cursor.execute("INSERT INTO Plants VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                                (plant.PlantID, plant.Alias, plant.MorphologicalFeatures, plant.CultivationKeyPoints, plant.ApplicationValue, plant.PlantIntroduction, plant.Creator, plant.CreationTime, plant.UpdateTime))
+            self.cursor.execute("INSERT INTO Plants VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                                (plant.PlantID,plant.Name,plant.Alias, plant.MorphologicalFeatures, plant.CultivationKeyPoints, plant.ApplicationValue, plant.PlantIntroduction, plant.Creator, plant.FamilyID, plant.GenusID,plant.SpeciesID,plant.ZoneID,plant.CreationTime.now(),plant.UpdateTime))
             self.connection.commit()
             return True
         except Exception as e:
