@@ -50,5 +50,12 @@ class 管理员(base_dao):
         except Exception as e:
             print(e)
             return False
-
-
+    
+#子菜单：系统信息配置
+#按业务进行配置
+#  if name_type == '植物养护':
+#     import_csv_to_database(csv_filename, dao_instance, entity_class)
+#  elif name_type == '植物监测':
+#     import_csv_to_database(csv_filename, dao_instance, entity_class)
+#  elif name_type == '植物病虫害':
+#     import_csv_to_database(csv_filename, dao_instance, entity_class)

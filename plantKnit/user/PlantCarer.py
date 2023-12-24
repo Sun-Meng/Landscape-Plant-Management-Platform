@@ -7,7 +7,7 @@ from db.utils.Factor import *
 class PlantCarer(object):
     def __init__(self):
         factory=DaoFactory()
-        self.careJob=factory.getDao("CareJob")
+        self.careJob=factory.get_dao("CareJob")
 
     def CareJob_lookUp(self,workerId):
         name=self.careJob.select_workerName(workerId)

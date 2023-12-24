@@ -1,43 +1,62 @@
 
 import sys
 sys.path.append("../..")
-from db.DaoImpl.daoImpl_S import careJob_dao_Impl
+from db.DaoImpl.daoImpl_Y import *
+from db.domain.domain_Y import *
+from db.domain.domain_S import *
+from db.utils.loading import import_csv_to_database
+from plantKnit.user.PlantCarer import PlantCarer
+from db.DaoImpl.daoImpl_S import careJob_dao_Impl, careWorker_dao_Impl
+
+user=PlantCarer()
+userID=233           #对应数据里的 刘立
+#测试数据
+import_csv_to_database("careWorker.csv",careWorker_dao_Impl(), CareWorker)
+import_csv_to_database("careJob.csv",careJob_dao_Impl(), CareJob)
+import_csv_to_database("pestInfo.csv",PestInfoDaoImpl(),PestInfo)
+import_csv_to_database("prevent.csv",PreventDaoImpl(),Prevent)
+import_csv_to_database("usage.csv",UsageDaoImpl(),Usage)
+import_csv_to_database("medicines.csv",MedicinesDaoImpl(),Medicines)
+#查询个人养护任务
+user.CareJob_lookUp(userID)
 
 
-dao=careJob_dao_Impl()
-search_all='''
-    SELECT * FROM CareJob
-'''
-search_caring_info='''
-            SELECT JobID,JobTitle,worker_name,result 
-            FROM CareJob as job inner join CareWorker as worker on job.workerID=worker.workerID
-        '''
-careJobs=dao.select(search_all)
+# dao=careJob_dao_Impl()
+# search_all='''
+#     SELECT * FROM CareJob
+# '''
+# search_caring_info='''
+#             SELECT JobID,JobTitle,worker_name,result 
+#             FROM CareJob as job inner join CareWorker as worker on job.workerID=worker.workerID
+#         '''
+# careJobs=dao.select(search_all)
 
-#验证是否能从数据库中，查询所有的养护任务信息
-for job in careJobs:
-    print("JobID:", job[0])
-    print("WorkerID:", job[1])
-    print("养护日期：", job[2])
-    print("养护地点：", job[3])
-    print("养护人：", job[4])
-    print()
+# #验证是否能从数据库中，查询所有的养护任务信息
+# for job in careJobs:
+#     print("JobID:", job[0])
+#     print("WorkerID:", job[1])
+#     print("养护日期：", job[2])
+#     print("养护地点：", job[3])
+#     print("养护人：", job[4])
+#     print()
 
-#验证是否能在数据库中，根据养护人员的ID 来查询某个工作人员的任务信息
-#写select_by_workerID()
-userId=1234
-myJobs=dao.select_by_id(userId)
-for job in myJobs:
-    print("JobID:", job[0])
-    print("JobTitle:", job[1])
-    print("养护日期：", job[2])
-    print("养护地点：", job[3])
-    print("养护人：", job[4])
-    print("植物：", job[5])
-    print("养护结果：", job[6])
-    print()
+# #验证是否能在数据库中，根据养护人员的ID 来查询某个工作人员的任务信息
+# #写select_by_workerID()
+# userId=1234
+# myJobs=dao.select_by_id(userId)
+# for job in myJobs:
+#     print("JobID:", job[0])
+#     print("JobTitle:", job[1])
+#     print("养护日期：", job[2])
+#     print("养护地点：", job[3])
+#     print("养护人：", job[4])
+#     print("植物：", job[5])
+#     print("养护结果：", job[6])
+#     print()
     
-    print("任务id:%s ,任务名称:%s, 任务日期:%s, 任务地点:%s, 目标植物:%s, 植物健康状况:%s, 一般养护措施:%s, 病虫害防治措施:%s, 完成情况:%s"%(row[0] .strip() , row[1], row[2]))
+#     print("任务id:%s ,任务名称:%s, 任务日期:%s, 任务地点:%s, 目标植物:%s, 植物健康状况:%s, 一般养护措施:%s, 病虫害防治措施:%s, 完成情况:%s"%(row[0] .strip() , row[1], row[2]))
+  
+    #思考过程
     #个人任务的创建(多表连接)
     #养护任务=对监测到的 有病害的植物 进行 针对性养护
     #insert的使用
