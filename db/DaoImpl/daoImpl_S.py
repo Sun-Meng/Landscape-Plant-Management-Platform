@@ -115,23 +115,23 @@ class plant_Family_dao_Impl(base_dao,plant_Family_dao):
     
     def insert(self,PlantFamily):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO Plant_Family VALUES (%s, %s, %s,%s)",
-                                (PlantFamily.PlantID, PlantFamily.id, PlantFamily.name,PlantFamily.info))
+        cursor.execute("INSERT INTO Plant_Family VALUES (%s, %s,%s)",
+                                (PlantFamily.id, PlantFamily.name,PlantFamily.info))
         #self.connection.commit()
         cursor.close()
     
     def update(self,PlantFamily) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE Plant_Family SET PlantID=%s, id=%s, name=%s,info=%s",
-                                (PlantFamily.PlantID, PlantFamily.id, PlantFamily.name,PlantFamily.info))
+        cursor.execute("UPDATE Plant_Family SET  id=%s, name=%s,info=%s",
+                                ( PlantFamily.id, PlantFamily.name,PlantFamily.info))
         #self.connection.commit()
         cursor.close()
     
     def delete(self,PlantFamilyID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Family WHERE PlantID=%s", (PlantFamilyID,))
+        cursor.execute("DELETE FROM Plant_Family WHERE id=%s", (PlantFamilyID,))
         #self.connection.commit()
         cursor.close()
   
@@ -146,16 +146,16 @@ class plant_Genus_dao_Impl(base_dao,plant_Genus_dao):
    
     def insert(self,PlantGenus):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO Plant_Genus VALUES (%s, %s, %s,%s)",
-                                (PlantGenus.PlantID, PlantGenus.id, PlantGenus.name,PlantGenus.info))
+        cursor.execute("INSERT INTO Plant_Genus VALUES (%s, %s,%s)",
+                                (PlantGenus.id, PlantGenus.name,PlantGenus.info))
         #self.connection.commit()
         cursor.close()
     
     def update(self,PlantGenus) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE Plant_Genus SET PlantID=%s, id=%s, name=%s,info=%s",
-                                (PlantGenus.PlantID, PlantGenus.id, PlantGenus.name,PlantGenus.info))
+        cursor.execute("UPDATE Plant_Genus SET  id=%s, name=%s,info=%s",
+                                ( PlantGenus.id, PlantGenus.name,PlantGenus.info))
 
         #self.connection.commit()
         cursor.close()
@@ -163,7 +163,7 @@ class plant_Genus_dao_Impl(base_dao,plant_Genus_dao):
     def delete(self,PlantGenusID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Genus WHERE PlantID=%s", (PlantGenusID,))
+        cursor.execute("DELETE FROM Plant_Genus WHERE id=%s", (PlantGenusID,))
 
         #self.connection.commit()
         cursor.close()
@@ -179,16 +179,16 @@ class plant_Species_dao_Impl(base_dao,plant_Species_dao):
 
     def insert(self,PlantSpecies):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO Plant_Species VALUES (%s, %s, %s,%s)",
-                                (PlantSpecies.PlantID, PlantSpecies.id, PlantSpecies.name,PlantSpecies.info))
+        cursor.execute("INSERT INTO Plant_Species VALUES (%s, %s,%s)",
+                                (PlantSpecies.id, PlantSpecies.name,PlantSpecies.info))
         #self.connection.commit()
         cursor.close()
     
     def update(self,PlantSpecies) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE Plant_Species SET PlantID=%s, id=%s, name=%s,info=%s",
-                                (PlantSpecies.PlantID, PlantSpecies.id, PlantSpecies.name,PlantSpecies.info))
+        cursor.execute("UPDATE Plant_Species SET  id=%s, name=%s,info=%s",
+                                (PlantSpecies.id, PlantSpecies.name,PlantSpecies.info))
 
         #self.connection.commit()
         cursor.close()
@@ -196,7 +196,7 @@ class plant_Species_dao_Impl(base_dao,plant_Species_dao):
     def delete(self,PlantSpeciesID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Species WHERE PlantID=%s", (PlantSpeciesID,))
+        cursor.execute("DELETE FROM Plant_Species WHERE id=%s", (PlantSpeciesID,))
 
         #self.connection.commit()
         cursor.close()
@@ -211,16 +211,16 @@ class plant_Species_dao_Impl(base_dao,plant_Species_dao):
 class plant_Zone_dao_Impl(base_dao,plant_Zone_dao):
     def insert(self,PlantZone):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO Plant_Zone VALUES (%s, %s, %s,%s, %s,%s)",
-                                (PlantZone.PlantID, PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.create_time,PlantZone.modified_time))
+        cursor.execute("INSERT INTO Plant_Zone VALUES ( %s, %s,%s, %s,%s)",
+                                ( PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.create_time,PlantZone.modified_time))
         #self.connection.commit()
         cursor.close()
     
     def update(self,PlantZone) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE Plant_Zone SET PlantID=%s, id=%s, name=%s,info=%s,modified_time=%s",
-                                (PlantZone.PlantID, PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.modified_time))
+        cursor.execute("UPDATE Plant_Zone SET  id=%s, name=%s,info=%s,modified_time=%s",
+                                ( PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.modified_time))
 
         #self.connection.commit()
         cursor.close()
@@ -228,7 +228,7 @@ class plant_Zone_dao_Impl(base_dao,plant_Zone_dao):
     def delete(self,PlantZoneID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Zone WHERE PlantID=%s", (PlantZoneID,))
+        cursor.execute("DELETE FROM Plant_Zone WHERE id=%s", (PlantZoneID,))
 
         #self.connection.commit()
         cursor.close()
