@@ -10,7 +10,8 @@ class PlantCarer(object):
         self.careJob=factory.getDao("CareJob")
 
     def CareJob_lookUp(self,workerId):
-        name=self.careJob.select_workerName()
+        name=self.careJob.select_workerName(workerId)
+        print("%s 's Workplace",(name,))
         myJobs=self.careJob.select_by_id(workerId)
         for job in myJobs:
             print('''
@@ -24,5 +25,5 @@ class PlantCarer(object):
                     完成情况:%s
                   '''
                   %(job[0] .strip() , job[1], job[2], job[3], job[4],job[5],job[6],job[7]))
-            
+        
     #病虫害防治措施单独查询即可
