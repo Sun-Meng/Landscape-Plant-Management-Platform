@@ -257,17 +257,17 @@ class PlantsDaoImpl(base_dao, PlantsDao):
         self.cursor.execute("SELECT * FROM Plants WHERE PlantID=%s", (PlantID,))
         result = self.cursor.fetchone()
         if result:
-            return Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8])
+            return Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8],result[9],result[10],result[11],result[12],result[13])
         else:
             return None
         
     def selectAll(self):
         self.cursor.execute("SELECT * FROM Plants")
         results = self.cursor.fetchone()
-        simple_informations = []
-        for result in results:
-            simple_informations.append(Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8]))
-        return simple_informations
+        #simple_informations = []
+        #for result in results:
+        #    simple_informations.append(Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8],result[9],result[10],result[11],result[12],result[13]))
+        return results
 
         
 class ShootingDaoImpl(base_dao, ShootingDao):

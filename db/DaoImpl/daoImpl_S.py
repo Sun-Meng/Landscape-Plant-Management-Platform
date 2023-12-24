@@ -89,7 +89,7 @@ class careJob_dao_Impl(base_dao,careJob_dao):
 
 class careWorker_dao_Impl(base_dao,careWorker_dao):
     
-    def _init__(self):
+    def __init__(self):
         self.connection = self.get_conn()
 
     def insert(self,CareWorker):
@@ -125,7 +125,10 @@ class careWorker_dao_Impl(base_dao,careWorker_dao):
    
 
 class plant_Family_dao_Impl(base_dao,plant_Family_dao):
-    
+
+    def __init__(self):
+        self.connection = self.get_conn()
+
     def insert(self,PlantFamily):
         cursor = self.connection.cursor()
         cursor.execute("INSERT INTO Plant_Family VALUES (%s, %s,%s)",
@@ -156,6 +159,9 @@ class plant_Family_dao_Impl(base_dao,plant_Family_dao):
         cursor.close()
 
 class plant_Genus_dao_Impl(base_dao,plant_Genus_dao):
+
+    def __init__(self):
+        self.connection = self.get_conn()
    
     def insert(self,PlantGenus):
         cursor = self.connection.cursor()
@@ -190,6 +196,9 @@ class plant_Genus_dao_Impl(base_dao,plant_Genus_dao):
 
 class plant_Species_dao_Impl(base_dao,plant_Species_dao):
 
+    def __init__(self):
+        self.connection = self.get_conn()
+
     def insert(self,PlantSpecies):
         cursor = self.connection.cursor()
         cursor.execute("INSERT INTO Plant_Species VALUES (%s, %s,%s)",
@@ -222,18 +231,22 @@ class plant_Species_dao_Impl(base_dao,plant_Species_dao):
         cursor.close()
 
 class plant_Zone_dao_Impl(base_dao,plant_Zone_dao):
+
+    def __init__(self):
+        self.connection = self.get_conn()
+
     def insert(self,PlantZone):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO Plant_Zone VALUES ( %s, %s,%s, %s,%s)",
-                                ( PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.create_time,PlantZone.modified_time))
+        cursor.execute("INSERT INTO Plant_Zone VALUES ( %s, %s,%s,%s,%s,%s)",
+                                ( PlantZone.ZoneID, PlantZone.Prov,PlantZone.City,PlantZone.County,PlantZone.create_time,PlantZone.modified_time))
         #self.connection.commit()
         cursor.close()
     
     def update(self,PlantZone) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE Plant_Zone SET  id=%s, name=%s,info=%s,modified_time=%s",
-                                ( PlantZone.id, PlantZone.name,PlantZone.info,PlantZone.modified_time))
+        cursor.execute("UPDATE Plant_Zone SET  ZoneID=%s, prov=%s,city=%s,county=%s,modified_time=%s",
+                                ( PlantZone.ZoneID, PlantZone.Prov,PlantZone.City,PlantZone.County,PlantZone.modified_time))
 
         #self.connection.commit()
         cursor.close()

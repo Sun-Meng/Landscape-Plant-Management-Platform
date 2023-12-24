@@ -12,6 +12,4 @@ class PlantCarer(object):
     def CareJob_lookUp(self,workerId):
         name=self.careJob.select_workerName()
         myJobs=self.careJob.select_by_id(workerId)
-        for job in myJobs:
-
-
+        # for job in myJobs:
