@@ -3,7 +3,7 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append("../..")
 
-from db.utils.leading import import_csv_to_database
+from db.utils.loading import import_csv_to_database
 from db.DaoImpl.daoImpl_X import Monitoring_Personnel_dao_Impl
 from db.domain.domain_X import Monitoring_Personnel
 
