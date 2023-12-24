@@ -8,7 +8,7 @@ from db.domain.domain_X import Monitoring_Personnel
 
 def import_csv_to_database(csv_path):
     # 读取 CSV 文件
-    data = pd.read_csv(csv_path)
+    data = pd.read_csv(csv_path,sep=',')
 
     # 使用数据库操作类进行数据库插入操作
     monitor_dao = Monitor_dao_Impl()
