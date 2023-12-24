@@ -4,30 +4,41 @@ class Illustration:
         self.IllustrationDescription = IllustrationDescription
         self.IllustrationName = IllustrationName
 
+    def output(self):
+        print(vars(self))
+
 class Usage:
     def __init__(self, UsageID, Dosage, PestID, MedicineID):
         self.UsageID = UsageID
         self.Dosage = Dosage
         self.PestID = PestID
         self.MedicineID = MedicineID
+    def output(self):
+        print(vars(self))   
 
 class Medicines:
     def __init__(self, MedicineID, MedicineName, ExpirationPeriod):
         self.MedicineID = MedicineID
         self.MedicineName = MedicineName
         self.ExpirationPeriod = ExpirationPeriod
+    def output(self):
+        print(vars(self))
 
 class Prevent:
     def __init__(self, MeasureID, PlantID, PestID):
         self.MeasureID = MeasureID
         self.PlantID = PlantID
         self.PestID = PestID
+    def output(self):
+        print(vars(self))
 
 class PestInfo:
     def __init__(self, PestID, PestName, PreventionMethod):
         self.PestID = PestID
         self.PestName = PestName
         self.PreventionMethod = PreventionMethod
+    def output(self):
+        print(vars(self))
 
 class Plants:
     def __init__(self, PlantID, Alias, MorphologicalFeatures, CultivationKeyPoints, ApplicationValue, PlantIntroduction, Creator, CreationTime, UpdateTime):
@@ -40,6 +51,8 @@ class Plants:
         self.Creator = Creator
         self.CreationTime = CreationTime
         self.UpdateTime = UpdateTime
+    def output(self):
+        print(vars(self))
         
 class Shooting:
     def __init__(self, ShootingID, ShootingLocation, Photographer, PlantID, IllustrationID):
@@ -48,3 +61,5 @@ class Shooting:
         self.Photographer = Photographer
         self.PlantID = PlantID
         self.IllustrationID = IllustrationID
+    def output(self):
+        print(vars(self))
