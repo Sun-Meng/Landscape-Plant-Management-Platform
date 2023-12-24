@@ -6,4 +6,12 @@ from db.DaoImpl.daoImpl_X import *
 from db.utils.Factor import *
 class PlantCarer(object):
     def __init__(self):
-        factor=DaoFactory()
+        factory=DaoFactory()
+        self.careJob=factory.getDao("CareJob")
+
+    def CareJob_lookUp(self,workerId):
+        name=self.careJob.select_workerName()
+        myJobs=self.careJob.select_by_id(workerId)
+        for job in myJobs:
+
+
