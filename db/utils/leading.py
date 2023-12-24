@@ -32,7 +32,6 @@ def import_csv_to_database(csv_path):
     print("CSV文件导入数据库成功")
 
 if __name__ == "__main__":
-    # 使用 os.path.join 构建文件路径
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(current_directory, "..", "docs", "HS.csv")
+    csv_path = os.path.join("..\..\plantKnit\data\HS.csv")
     import_csv_to_database(csv_path)
