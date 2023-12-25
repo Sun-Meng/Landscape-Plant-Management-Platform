@@ -23,7 +23,7 @@ class Monitor(object):
         # 调用通用函数
         import_csv_to_database(csv_filename, dao_instance, entity_class)
     
-    def menu():
+    def menu(self):
         while(True):
             print('-----监测人员界面-----')
             print('1.手工录入数据')
@@ -31,9 +31,9 @@ class Monitor(object):
             print('3.结束')
             i=input('所执行业务ID：')
             if(i==1):
-                logging(input('请输入数据'))
+                self.logging(input('请输入数据'))
             elif(i==2):
-                loading(input('%s'))
+                self.loading(input('%s'))
             elif(i==3):
                 break
             else:
