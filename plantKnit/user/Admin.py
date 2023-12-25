@@ -132,7 +132,7 @@ class Admin(base_dao):
             elif(i==8):
                 zone=PlantZone(input('区域id'),input('省'),input('国家'),input('市'),datetime.now(),datetime.now())
                 self.zone.update(zone)
-            elif(i==9)
+            elif(i==9):
                 self.setConfigInfo()
             elif(i==10):
                 break
