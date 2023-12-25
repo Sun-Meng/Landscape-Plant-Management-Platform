@@ -52,7 +52,7 @@ class IllustrationDaoImpl(base_dao,IllustrationDao):
 class UsageDaoImpl(base_dao,UsageDao):
     def __init__(self):
         self.connection = self.get_conn() 
-        cursor = self.connection.cursor()
+        self.cursor = self.connection.cursor()
     def insert(self, Usage:Usage) -> bool:
         try:
             self.cursor.execute ("INSERT INTO Usage VALUES (%s, %s, %s, %s)",

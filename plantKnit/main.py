@@ -21,7 +21,7 @@ print('欢迎来到植物管理平台')
 while(True):
     print('请登录')    
     user=login(input('ID:'),input('password:'))
-    user.menu()   
+    user.menu() #每个用户都有自己的子菜单 
     print('～～主页面～～')
     print('1.登录其它用户')
     print('2.退出系统')

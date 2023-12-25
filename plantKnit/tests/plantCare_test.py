@@ -11,12 +11,6 @@ from db.DaoImpl.daoImpl_S import careJob_dao_Impl, careWorker_dao_Impl
 user=PlantCarer()
 userID=233           #对应数据里的 刘立
 #测试数据
-import_csv_to_database("careWorker.csv",careWorker_dao_Impl(), CareWorker)
-import_csv_to_database("careJob.csv",careJob_dao_Impl(), CareJob)
-import_csv_to_database("pestInfo.csv",PestInfoDaoImpl(),PestInfo)
-import_csv_to_database("prevent.csv",PreventDaoImpl(),Prevent)
-import_csv_to_database("usage.csv",UsageDaoImpl(),Usage)
-import_csv_to_database("medicines.csv",MedicinesDaoImpl(),Medicines)
 #查询个人养护任务（1）
 user.CareJob_lookUp(userID)
 
