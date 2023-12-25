@@ -6,7 +6,7 @@ from db.DaoImpl.daoImpl_S import *
 from db.DaoImpl.daoImpl_Y import *
 from db.DaoImpl.daoImpl_X import *
 from db.utils.Factor import *
-class Higher(object):
+class HigherManager(object):
     def __init__(self):
         factory=DaoFactory
         self.careJob=factory.get_dao("Monitor")
