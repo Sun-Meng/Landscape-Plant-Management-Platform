@@ -7,7 +7,7 @@ from db.DaoImpl.daoImpl_Y import *
 from db.DaoImpl.daoImpl_X import *
 from db.utils.Factor import *
 from db.utils.loading import import_csv_to_database
-class Monitor(object):
+class MonitorStaff(object):
     def __init__(self):
         factory=DaoFactory()
         self.Monitor=factory.get_Dao("Monitor")

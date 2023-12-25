@@ -7,8 +7,8 @@ from db.DaoImpl.daoImpl_Y import *
 from db.DaoImpl.daoImpl_X import *
 from db.utils.Factor import *
 from plantKnit.user.Admin import *
-from plantKnit.user.Higher import *
-from plantKnit.user.Monitor import *
+from plantKnit.user.HigherManager import *
+from plantKnit.user.MonitorStaff import *
 from plantKnit.user.PlantCarer import * 
 from datetime import datetime
 
@@ -36,10 +36,10 @@ while(True):
             identity=PlantCarer(userId)
             print(f"养护人员{userId}登录成功！")
         elif workertype.replace(" ","") =='监测人员':
-            identity=Monitor()
+            identity=MonitorStaff
             print(f"监测人员{userId}登录成功！")
         elif workertype.replace(" ","") =='上层主管':
-            identity=Higher()
+            identity=HigherManager()
             print(f"主管{userId}登录成功！")
         elif workertype.replace(" ","") =='系统管理员':
             identity=Admin()
@@ -48,7 +48,7 @@ while(True):
         print("登录失败，请检查用户名和密码。")
         print()
    
-    identity.menu() #每个用户都有自己的子菜单 
+    identity.menu #每个用户都有自己的子菜单 
     print('～～主页面～～')
     print('1.登录其它用户')
     print('2.退出系统')
