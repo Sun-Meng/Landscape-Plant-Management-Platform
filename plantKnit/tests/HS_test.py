@@ -18,8 +18,8 @@ userID=1001
 #查询个人养护任务（1）
 #user.viewCare(userID)
 #user.viewCareWorker(userID)
-user.viewMonitoring_Personnel(userID)
-
+#user.viewMonitoring_Personnel(userID)combineSearch
+user.combineSearch(userID)
 
 '''
 import sys

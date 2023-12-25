@@ -6,13 +6,14 @@ from db.DaoImpl.daoImpl_S import *
 from db.DaoImpl.daoImpl_Y import *
 from db.DaoImpl.daoImpl_X import *
 from db.utils.Factor import *
-class Higher(object):
+class Higher(base_dao):
     def __init__(self):
         factory=DaoFactory
         self.careJob=factory.get_dao("Monitor")
         self.careWorker=factory.get_dao("Monitoring_Equipment")
         self.Monitoring_Personnel=factory.get_dao("Monitoring_Personnel")
-    
+        self.connection = self.get_conn() 
+        
     def viewCare(self,id):
         temp=self.careJob.select(id)
         if(temp!=None):
