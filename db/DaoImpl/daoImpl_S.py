@@ -80,24 +80,21 @@ class careJob_dao_Impl(base_dao,careJob_dao):
         cursor.close()
         return results
     
-#   只返回 养护结果
+    #只返回 养护结果
+    #format : 任务id 任务名称 任务日期 任务地点 目标植物 植物健康状况 养护人 完成情况 完成时间
     # def select_caring_result(self):
     #     cursor = self.connection.cursor()
     #     sql='''
-    #         SELECT JobID,JobTitle,worker_name,result 
-    #         FROM CareJob as job inner join Gardener as gd on job.workerID=gd.workerID
+    #         SELECT JobID,JobTitle,date,location,p.Name,HealthStatus,worker_name,result,
+    #         FROM CareJob as job 
+    #             inner join CareWorker as cw on job.workerID=cw.workerID
+    #             inner join Plants as p on p.PlantID=job.PlantID
+    #             inner join Monitor as m on m.PlantID=p.PlantID 
     #     '''
     #     cursor.execute(sql)
     #     results = cursor.fetchall()
     #     return results
 
-    # def select_all(self):
-    #     cursor = self.connection.cursor()
-    #     cursor.execute("SELECT * FROM CareJob")
-    #     results = cursor.fetchall()
-    #     print(pd.DataFrame(list(results)).shape)#用于验证是否成功读入数据库内容
-
-    #     return results
 
 class careWorker_dao_Impl(base_dao,careWorker_dao):
     

@@ -13,13 +13,28 @@ class Higher(object):
         self.careWorker=factory.get_dao("Monitoring_Equipment")
         self.Monitoring_Personnel=factory.get_dao("Monitoring_Personnel")
     
-    def viewCare(self,id):
-        temp=self.careJob.select(id)
-        if(temp!=None):
-            for i in temp:
-                print(i)
-        else:print("id有误")
-        
+    def viewCare(self):
+        CareResult='''
+            SELECT JobID,JobTitle,date,location,p.Name,HealthStatus,worker_name,result,
+            FROM CareJob as job 
+                inner join CareWorker as cw on job.workerID=cw.workerID
+                inner join Plants as p on p.PlantID=job.PlantID
+                inner join Monitor as m on m.PlantID=p.PlantID 
+        '''
+        results=self.careJob.select(CareResult)
+        for res in results:
+            print('''
+                    任务id:%s ,
+                    任务名称:%s,
+                    任务日期:%s, 
+                    任务地点:%s, 
+                    目标植物:%s, 
+                    植物健康状况:%s, 
+                    养护人:%s, 
+                    完成情况:%s,
+                    '''
+                    %(res[0], res[1], res[2], res[3], res[4],res[5],res[6],res[7]))
+           
     def viewCareWorker(self,id):
         temp=self.careWorker.select(id)
         if(temp!=None):
@@ -78,7 +93,7 @@ class Higher(object):
             JOIN 
                 Plant_Species ON Plants.SpeciesID = Plant_Species.id
             WHERE 
-                CareJob.PlantID = '%s';
+                CareJob.PlantID = %s;
             ''', (id,))
         result = cursor.fetchone()
         # 打印结果
@@ -92,25 +107,25 @@ class Higher(object):
             print('3.查看植物的所有养护、分类、基本信息')
             print('4.结束')
             i=input('所执行业务ID：')
-            if(i==1):
+            if(i=="1"):
                 self.viewCare(input('任务ID'))
-            elif(i==2):
+            elif(i=="2"):
                 print('-----2.查看工作人员信息-----')
                 print('1.查看养护人员信息')
                 print('2.查看监测人员信息')
                 print('3.结束')
                 j=input('所执行业务ID：')
-                if(j==1):
+                if(j=="1"):
                     self.viewCareWorker(input('人员ID'))
-                elif(j==2):
+                elif(j=="2"):
                     self.viewMonitoring_Personnel(input('人员ID'))
-                elif(j==3):
+                elif(j=="3"):
                     break
                 else:
                     print('错误的执行ID')
-            elif(i==3):
+            elif(i=="3"):
                 self.combineSearch(input('植物ID'))
-            elif(i==4):
+            elif(i=="4"):
                 break
             else:
                 print('错误的执行ID')
