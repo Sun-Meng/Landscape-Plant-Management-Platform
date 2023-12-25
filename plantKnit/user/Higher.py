@@ -8,7 +8,7 @@ from db.DaoImpl.daoImpl_X import *
 from db.utils.Factor import *
 class Higher(object):
     def __init__(self):
-        factory=DaoFactory()
+        factory=DaoFactory
         self.careJob=factory.get_dao("Monitor")
         self.careWorker=factory.get_dao("Monitoring_Equipment")
         self.Monitoring_Personnel=factory.get_dao("Monitoring_Personnel")
@@ -16,19 +16,22 @@ class Higher(object):
     def viewCare(self,id):
         temp=self.careJob.select(id)
         if(temp!=None):
-            print(vars(temp))
+            for i in temp:
+                print(i)
         else:print("id有误")
         
     def viewCareWorker(self,id):
         temp=self.careWorker.select(id)
         if(temp!=None):
-            print(vars(temp))
+            for i in temp:
+                print(i)
         else:print("id有误")
         
     def viewMonitoring_Personnel(self,id):
         temp=self.Monitoring_Personnel.select(id)
         if(temp!=None):
-            print(vars(temp))
+            for i in temp:
+                print(i)
         else:print("id有误")
         
     def combineSearch(self,id):
