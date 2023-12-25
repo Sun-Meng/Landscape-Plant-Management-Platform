@@ -52,12 +52,12 @@ class Monitor(object):
             print('1.手工录入数据')
             print('2.批量导入数据')
             print('3.结束')
-            i=input('所执行业务ID：')
-            if(i==1):
+            i=input('所执行业务ID:')
+            if(i=="1"):
                 self.logging(input('请输入数据'))
-            elif(i==2):
+            elif(i=="2"):
                 self.loading(input('%s'))
-            elif(i==3):
+            elif(i=="3"):
                 break
             else:
                 print('错误的执行ID')
