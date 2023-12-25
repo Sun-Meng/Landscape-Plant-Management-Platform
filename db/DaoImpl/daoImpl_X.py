@@ -98,7 +98,6 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM Monitoring_Personnel WHERE PersonID=%s", (PersonID,))
         result = cursor.fetchall()
-        print(pd.DataFrame(list(result)).shape)
         cursor.close()
         return result
     
