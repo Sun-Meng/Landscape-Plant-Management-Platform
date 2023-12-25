@@ -8,6 +8,8 @@ class PlantCarer(object):
     def __init__(self):
         factory=DaoFactory
         self.careJob=factory.get_dao("CareJob")
+        self.pestInfo=factory.get_dao("PestInfo")
+        #self.workerId=
 
     def CareJob_lookUp(self,workerId):
         name=self.careJob.select_workerName(workerId)
@@ -27,3 +29,9 @@ class PlantCarer(object):
                   %(job[0] .strip() , job[1], job[2], job[3], job[4],job[5],job[6],job[7]))
         
     #病虫害防治措施单独查询即可
+    #根据属性HealthStatus筛选，重点在 病虫害治理相关的 表连接
+    #format:
+    #植物ID　植物病名　使用药剂名　药剂用量　药剂过期时间　治理措施
+    def SickCaringMethod_lookUp(self,workerId,HealthStatus):
+        #union+条件
+         self.pestInfo.select()

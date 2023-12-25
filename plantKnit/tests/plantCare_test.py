@@ -17,8 +17,12 @@ import_csv_to_database("pestInfo.csv",PestInfoDaoImpl(),PestInfo)
 import_csv_to_database("prevent.csv",PreventDaoImpl(),Prevent)
 import_csv_to_database("usage.csv",UsageDaoImpl(),Usage)
 import_csv_to_database("medicines.csv",MedicinesDaoImpl(),Medicines)
-#查询个人养护任务
+#查询个人养护任务（1）
 user.CareJob_lookUp(userID)
+
+##查询有病害植物的养护措施（1.1）
+
+
 
 
 # dao=careJob_dao_Impl()
