@@ -16,8 +16,8 @@ user=Higher()
 userID=1
 #测试数据
 #查询个人养护任务（1）
-user.viewCare(userID)
-user.viewCareWorker(userID)
+#user.viewCare(userID)
+#user.viewCareWorker(userID)
 user.viewMonitoring_Personnel(userID)
 
 
