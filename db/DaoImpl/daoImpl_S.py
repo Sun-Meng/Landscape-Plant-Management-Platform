@@ -18,8 +18,8 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def insert(self,CareJob) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("INSERT INTO CareJob VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)",
-                                (CareJob.JobID, CareJob.WorkerID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.create_time,CareJob.modified_time))
+        cursor.execute("INSERT INTO CareJob VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                                (CareJob.JobID, CareJob.WorkerID, CareJob.PlantID,CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.create_time,CareJob.modified_time))
         #self.connection.commit()
         cursor.close()
 
@@ -33,8 +33,8 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def update(self,CareJob):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE CareJob SET JobID=%s, WorkerID=%s, Name=%s,Date=%s,Location=%s,RegularJob=%s,Result=%s,modified_time=%s",
-                                (CareJob.JobID, CareJob.WorkerID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.modified_time))
+        cursor.execute("UPDATE CareJob SET JobID=%s, WorkerID=%s, PlantID=%s,Name=%s,Date=%s,Location=%s,RegularJob=%s,Result=%s,modified_time=%s",
+                                (CareJob.JobID, CareJob.WorkerID,CareJob.PlantID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.modified_time))
         # self.conn.commit()
         cursor.close()
 
@@ -66,11 +66,13 @@ class careJob_dao_Impl(base_dao,careJob_dao):
         cursor = self.connection.cursor()
         cursor.execute(
             ('''
-                SELECT JobID,JobTitle,date,location,Name,PestName,HealthStatus,RegularJob,result 
+                SELECT JobID,JobTitle,date,location,p.Name,PestName,HealthStatus,RegularJob,result 
                 FROM CareWorker as wk 
                     inner join CareJob as job on job.workerID=wk.workerID 
                     inner join Plants as p on p.PlantID=job.PlantID 
-                    inner join Monitor as m on m.PlantID=p.PlantID 
+                    inner join Monitor as m on m.PlantID=p.PlantID
+					inner join Prevent as pvn on pvn.PlantID=p.PlantID
+					inner join PestInfo as pest on pest.PestID=pvn.PestDiseaseID 
                 WHERE job.workerID=%s
              ''',(id,)))
         results = cursor.fetchall()

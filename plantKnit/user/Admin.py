@@ -1,5 +1,6 @@
 import sys
 sys.path.append("../..")
+from db.utils.loading import import_csv_to_database
 from db.DaoImpl.daoImpl_S import *
 from db.DaoImpl.daoImpl_Y import *
 from db.DaoImpl.daoImpl_X import *
@@ -63,7 +64,40 @@ class Admin(base_dao):
         self.species.update(species)
     def updateZone(self,zone):
         self.zone.update(zone)
-    def menu():
+    def setConfigInfo(self):
+         while(True):
+            print('-----系统信息配置界面-----')
+            print('1.配置植物信息')
+            print('2.配置植物分类信息')
+            print('3.配置植物养护信息')
+            print('4.配置植物病虫害信息')
+            print('5.配置植物监测信息')
+            print('6.退出系统配置')
+            i=input('所执行业务ID:')
+            if(i==1):
+                import_csv_to_database("Plants.csv", PlantsDaoImpl(), Plants)
+            elif(i==2):
+                import_csv_to_database("PlantFamily.csv", plant_Family_dao_Impl(), Plants)
+                import_csv_to_database("PlantGenus.csv", plant_Genus_dao_Impl(), Plants)
+                import_csv_to_database("PlantSpecies.csv", plant_Species_dao_Impl(), Plants)
+                import_csv_to_database("PlantZone.csv", plant_Zone_dao_Impl(), Plants)
+            elif(i==3):
+                import_csv_to_database("careWorker.csv",careWorker_dao_Impl(), CareWorker)
+                import_csv_to_database("careJob.csv",careJob_dao_Impl(), CareJob)
+            elif(i==4):
+                import_csv_to_database("pestInfo.csv",PestInfoDaoImpl(),PestInfo)
+                import_csv_to_database("prevent.csv",PreventDaoImpl(),Prevent)
+                import_csv_to_database("usage.csv",UsageDaoImpl(),Usage)
+                import_csv_to_database("medicines.csv",MedicinesDaoImpl(),Medicines)
+            elif(i==5):
+                # 具体内容 HS 填写(这里应该只需要导入除了 监测结果表 以外的内容，不与前序业务冲突)
+
+            elif(i==6):
+                break
+            else:
+                print('错误的执行ID')
+
+    def menu(self):
         while(True):
             print('-----管理员界面-----')
             print('1.查看植物信息')
@@ -74,30 +108,33 @@ class Admin(base_dao):
             print('6.修改属信息')
             print('7.修改种信息')
             print('8.修改区域信息')
-            print('9.结束')
-            i=input('所执行业务ID：')
+            print('9.系统信息配置')
+            print('10.结束')
+            i=input('所执行业务ID:')
             if(i==1):
-                viewPlant(input('植物ID'))
+                self.viewPlant(input('植物ID'))
             elif(i==2):
-                viewAllPlants()
+                self.viewAllPlants()
             elif(i==3):
-                viewSort(input('植物ID'))
+                self.viewSort(input('植物ID'))
             elif(i==4):
-                plant=Plant(input('植物ID'),input('植物名'),input('忘了啥内容'),input('忘了啥内容'),input('忘了啥内容'),input('忘了啥内容'),input('忘了啥内容'),datetime.now(),datetime.now(),input('科ID'),input('属ID'),input('种ID'),input('区域ID'))
+                plant=Plants(input('植物ID'),input('植物名'),input('忘了啥内容'),input('忘了啥内容'),input('忘了啥内容'),input('忘了啥内容'),input('忘了啥内容'),datetime.now(),datetime.now(),input('科ID'),input('属ID'),input('种ID'),input('区域ID'))
                 self.plant.update(plant)
             elif(i==5):
-                family=Plant_Family(input('科ID'),input('科名'),input('科描述'))
+                family=PlantFamily(input('科ID'),input('科名'),input('科描述'))
                 self.family.update(family)
             elif(i==7):
-                species=Plant_Species(input('属ID'),input('属名'),input('属描述'))
+                species=PlantSpecies(input('属ID'),input('属名'),input('属描述'))
                 self.species.update(species)
             elif(i==6):
-                genus=Plant_Genus(input('种ID'),input('种名'),input('种描述'))
+                genus=PlantGenus(input('种ID'),input('种名'),input('种描述'))
                 self.genus.update(genus)
             elif(i==8):
-                zone=Plant_Zone(input('区域id'),input('省'),input('国家'),input('市'),datetime.now(),datetime.now())
+                zone=PlantZone(input('区域id'),input('省'),input('国家'),input('市'),datetime.now(),datetime.now())
                 self.zone.update(zone)
-            elif(i==9):
+            elif(i==9)
+
+            elif(i==10):
                 break
             else:
                 print('错误的执行ID')

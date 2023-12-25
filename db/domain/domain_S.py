@@ -1,7 +1,8 @@
 class CareJob(object):
-    def __init__(self, JobID,WorkerID,Name, Date, Location,RegularJob,Result,create_time,modified_time):
+    def __init__(self, JobID,WorkerID,PlantID,Name, Date, Location,RegularJob,Result,create_time,modified_time):
         self.JobID = JobID
         self.WorkerID = WorkerID
+        self.PlantID=PlantID
         self.Name = Name
         self.Date = Date
         self.Location = Location

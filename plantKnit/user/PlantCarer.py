@@ -13,7 +13,7 @@ class PlantCarer(object):
 
     def CareJob_lookUp(self,workerId):
         name=self.careJob.select_workerName(workerId)
-        print("%s 's Workplace",(name,))
+        print(f"{name}'s Workplace")
         myJobs=self.careJob.select_by_id(workerId)
         for job in myJobs:
             print('''
@@ -34,4 +34,18 @@ class PlantCarer(object):
     #植物ID　植物病名　使用药剂名　药剂用量　药剂过期时间　治理措施
     def SickCaringMethod_lookUp(self,workerId,HealthStatus):
         #union+条件
-         self.pestInfo.select()
+        myJobs=self.pestInfo.select()
+        for job in myJobs:
+            print('''
+                    植物id:%s ,
+                    植物病名:%s, 
+                    使用药剂名:%s, 
+                    药剂用量:%s, 
+                    药剂过期时间:%s, 
+                    治理措施:%s, 
+                    '''
+                    %(job[0] .strip() , job[1], job[2], job[3], job[4],job[5]))
+            
+
+#上级管理部门（写在Higher类）
+    #format : 任务id 任务名称 任务日期 任务地点 目标植物 植物健康状况 养护人 完成情况 完成时间
