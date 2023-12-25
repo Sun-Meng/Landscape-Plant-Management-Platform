@@ -106,14 +106,14 @@ class careWorker_dao_Impl(base_dao,careWorker_dao):
         cursor = self.connection.cursor()
         #插入sql
         cursor.execute("INSERT INTO CareWorker VALUES (%s, %s, %s,%s,%s,%s,%s)",
-                                (CareWorker.WorkerID,CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.create_time,CareWorker.modified_time))
+                                (CareWorker.ID,CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.create_time,CareWorker.modified_time))
         #self.connection.commit()
         cursor.close()
     
     def update(self,CareWorker) :
         cursor = self.connection.cursor()
         cursor.execute("UPDATE CareWorker SET WorkerID=%s, Name=%s,Sex=%s,Birth=%s,Tel=%s,modified_time=%s",
-                                (CareWorker.WorkerID, CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.modified_time))
+                                (CareWorker.ID, CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.modified_time))
         #self.connection.commit()
         cursor.close()
    

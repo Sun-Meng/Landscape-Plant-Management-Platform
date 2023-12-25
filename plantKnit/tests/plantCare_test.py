@@ -5,7 +5,7 @@ from db.DaoImpl.daoImpl_Y import *
 from db.domain.domain_Y import *
 from db.domain.domain_S import *
 from db.utils.loading import import_csv_to_database
-from plantKnit.user.PlantCarer import PlantCarer
+from plantKnit.user.PlantCarer import *
 from db.DaoImpl.daoImpl_S import careJob_dao_Impl, careWorker_dao_Impl
 
 user=PlantCarer()
