@@ -16,19 +16,19 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
     def insert(self,Monitor) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitor values(%s,%s,%s,%s)",(Monitor.diseaseID,Monitor.name,Monitor.create_time,Monitor.update_time))
+        cursor.execute("insert into Monitor values(%s,%s,%s,%s)",(Monitor.resultID,Monitor.name,Monitor.create_time,Monitor.update_time))
         self.connection.commit()
         cursor.close()
 
     def delete(self,Monitor):
         cursor = self.connection.cursor()
-        cursor.execute("delete from Monitor where diseaseID=%s",(Monitor.diseaseID))
+        cursor.execute("delete from Monitor where resultID=%s",(Monitor.resultID))
         self.connection.commit()
         cursor.close()
     
     def update(self,Monitor):
         cursor = self.connection.cursor()
-        cursor.execute("update Monitor set name = %s, create_time = %s, update_time = %s where diseaseID = %s",(Monitor.name, Monitor.create_time, Monitor.update_time, Monitor.diseaseID))
+        cursor.execute("update Monitor set name = %s, create_time = %s, update_time = %s where resultID = %s",(Monitor.name, Monitor.create_time, Monitor.update_time, Monitor.resultID))
         self.connection.commit()
         cursor.close()
 

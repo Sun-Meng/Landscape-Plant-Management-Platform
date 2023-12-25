@@ -1,12 +1,12 @@
 class Monitor(object):
-    def __init__(self, diseaseID, name, create_time, update_time):
-        self.diseaseID = diseaseID
+    def __init__(self, resultID, name, create_time, update_time):
+        self.resultID = resultID
         self.name = name
         self.create_time = create_time
         self.update_time = update_time
         
-    def get_diseaseID(self):
-        return self.diseaseID
+    def get_resultID(self):
+        return self.resultID
     
     def get_name(self):
         return self.name

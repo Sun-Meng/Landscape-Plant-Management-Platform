@@ -81,7 +81,7 @@ class Higher(object):
         # 打印结果
         print(result)
     
-    def menu():
+    def menu(self):
         while(True):
             print('-----上层管理部门界面-----')
             print('1.查看养护结果')
@@ -90,7 +90,7 @@ class Higher(object):
             print('4.结束')
             i=input('所执行业务ID：')
             if(i==1):
-                viewCare(input('任务ID'))
+                self.viewCare(input('任务ID'))
             elif(i==2):
                 print('-----2.查看工作人员信息-----')
                 print('1.查看养护人员信息')
@@ -98,15 +98,15 @@ class Higher(object):
                 print('3.结束')
                 j=input('所执行业务ID：')
                 if(j==1):
-                    viewCareWorker(input('人员ID'))
+                    self.viewCareWorker(input('人员ID'))
                 elif(j==2):
-                    viewMonitoring_Personnel(input('人员ID'))
+                    self.viewMonitoring_Personnel(input('人员ID'))
                 elif(j==3):
                     break
                 else:
                     print('错误的执行ID')
             elif(i==3):
-                combineSearch(input('植物ID'))
+                self.combineSearch(input('植物ID'))
             elif(i==4):
                 break
             else:
