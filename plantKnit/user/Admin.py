@@ -8,7 +8,7 @@ from db.utils.Factor import *
 from datetime import datetime
 class Admin(base_dao):
     def __init__(self):
-        factor=DaoFactory()
+        factor=DaoFactory
         self.plants=factor.get_dao("Plants")
         self.familys=factor.get_dao("Plant_Family")
         self.genus=factor.get_dao("Plant_Genus")
@@ -44,7 +44,7 @@ class Admin(base_dao):
                     Plant_Species ON Plants.SpeciesID = Plant_Species.id
                 INNER JOIN 
                     Plant_Zone ON Plants.ZoneID = Plant_Zone.ZoneID
-                updateSort(self,familyWHERE 
+                WHERE 
                     Plants.PlantID = %s
             ''', (id,))
             result = cursor.fetchone()
@@ -139,11 +139,3 @@ class Admin(base_dao):
             else:
                 print('错误的执行ID')
     
-#子菜单：系统信息配置
-#按业务进行配置
-#  if name_type == '植物养护':
-#     import_csv_to_database(csv_filename, dao_instance, entity_class)
-#  elif name_type == '植物监测':
-#     import_csv_to_database(csv_filename, dao_instance, entity_class)
-#  elif name_type == '植物病虫害':
-#     import_csv_to_database(csv_filename, dao_instance, entity_class)

@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../..")
+sys.path.append("..")
 from db.DaoImpl.daoImpl_S import *
 from db.DaoImpl.daoImpl_Y import *
 from db.DaoImpl.daoImpl_X import *
@@ -10,7 +10,7 @@ from plantKnit.user.Monitor import *
 from plantKnit.user.PlantCarer import * 
 from datetime import datetime
 
-def login(swld,id,password):
+def login(id,password):
     pass#靠你了，在这里实现获取用户类
     #假如是管理员Admin
     #return Admin()
