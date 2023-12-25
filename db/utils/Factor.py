@@ -18,9 +18,16 @@ class DaoFactory:
             return PestInfoDaoImpl()
         elif dao_type == 'Plants':
             return PlantsDaoImpl()
+        elif dao_type =='Plant_Family':
+            return plant_Family_dao_Impl()
+        elif dao_type =='Plant_Genus':
+            return plant_Genus_dao_Impl()
+        elif dao_type =='Plant_Species':
+            return plant_Species_dao_Impl()
+        elif dao_type =='Plant_Zone':
+            return plant_Zone_dao_Impl()
         elif dao_type == 'Shooting':
             return ShootingDaoImpl()
-        
         elif dao_type == 'CareJob':
             return careJob_dao_Impl()
         elif dao_type == 'Medicines':

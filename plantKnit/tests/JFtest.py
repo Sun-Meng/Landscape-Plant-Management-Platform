@@ -1,7 +1,7 @@
 import sys
 sys.path.append("../..")
 from datetime import datetime
-from plantKnit.user.管理员 import *
+from plantKnit.user.Admin import *
 
 from db.utils.dao import *
 from db.domain.domain_Y import *
