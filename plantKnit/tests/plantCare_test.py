@@ -9,14 +9,15 @@ from db.utils.loading import import_csv_to_database
 from plantKnit.user.PlantCarer import *
 from db.DaoImpl.daoImpl_S import careJob_dao_Impl, careWorker_dao_Impl
 
-user=PlantCarer()
-userID=233           #对应数据里的 刘立
+userID=233   #对应数据里的 刘立
+user=PlantCarer(userID)
+        
 #测试数据
 #查询个人养护任务（1）
-user.CareJob_lookUp(userID)
+user.CareJob_lookUp()
 
 ##查询有病害植物的养护措施（1.1）
-
+user.CaringMethod_lookUp("unhealthy")
 
 
 

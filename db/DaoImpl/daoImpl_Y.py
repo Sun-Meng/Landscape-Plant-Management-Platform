@@ -1,6 +1,7 @@
 from datetime import datetime
 import sys
 sys.path.append("../..")
+import pandas as pd
 from db.Dao.dao_Y import *
 from db.utils.dao import *
 from db.domain.domain_Y import *
@@ -174,7 +175,25 @@ class PreventDaoImpl(base_dao, PreventDao):
             return Prevent(result[0], result[1], result[2])
         else:
             return None
-
+        
+    def select_by_id(self,id,plantStatus):
+        self.cursor.execute(
+            '''
+                SELECT p.PlantID,p.Name,PestName,MedicineName,Dosage,ExpirationPeriod,PreventionMethod
+                FROM CareWorker as wk 
+                    inner join CareJob as job on job.workerID=wk.workerID 
+                    inner join Plants as p on p.PlantID=job.PlantID 
+                    inner join Monitor as m on m.PlantID=p.PlantID
+                    inner join Prevent as pvn on pvn.PlantID=p.PlantID
+                    inner join PestInfo as pest on pest.PestID=pvn.PestDiseaseID
+                    inner join Usage as u on u.PestID=pest.PestID
+                    inner join Medicines as mdc on mdc.MedicineID=u.MedicineID
+                WHERE job.workerID=%s AND HealthStatus like %s
+                ''',(id,plantStatus,))
+        results = self.cursor.fetchall()
+        print(pd.DataFrame(list(results)).shape)    #用于验证是否成功读入数据库内容
+        self.cursor.close()
+        return results
 
 class PestInfoDaoImpl(base_dao, PestInfoDao):
     def __init__(self):

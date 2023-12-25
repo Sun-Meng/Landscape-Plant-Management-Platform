@@ -56,16 +56,16 @@ class careJob_dao_Impl(base_dao,careJob_dao):
                 select worker_name 
                 from CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID 
             ''')
-        workerName = cursor.fetchone()
+        result = cursor.fetchone()
 
         # self.connection.commit()
         cursor.close()
-        return workerName
+        return result[0]
     
     def select_by_id(self,id):
         cursor = self.connection.cursor()
         cursor.execute(
-            ('''
+            '''
                 SELECT JobID,JobTitle,date,location,p.Name,PestName,HealthStatus,RegularJob,result 
                 FROM CareWorker as wk 
                     inner join CareJob as job on job.workerID=wk.workerID 
@@ -74,7 +74,7 @@ class careJob_dao_Impl(base_dao,careJob_dao):
 					inner join Prevent as pvn on pvn.PlantID=p.PlantID
 					inner join PestInfo as pest on pest.PestID=pvn.PestDiseaseID 
                 WHERE job.workerID=%s
-             ''',(id,)))
+             ''',(id,))
         results = cursor.fetchall()
         print(pd.DataFrame(list(results)).shape)    #用于验证是否成功读入数据库内容
         cursor.close()
