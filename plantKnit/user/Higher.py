@@ -9,9 +9,9 @@ from db.utils.Factor import *
 class Higher(object):
     def __init__(self):
         factory=DaoFactory()
-        self.careJob=factory.get_Dao("careJob")
-        self.careWorker=factory.get_Dao("careWorker")
-        self.Monitoring_Personnel=factory.get_Dao("Monitoring_Personnel")
+        self.careJob=factory.get_dao("Monitor")
+        self.careWorker=factory.get_dao("Monitoring_Equipment")
+        self.Monitoring_Personnel=factory.get_dao("Monitoring_Personnel")
     
     def viewCare(self,id):
         temp=self.careJob.select(id)

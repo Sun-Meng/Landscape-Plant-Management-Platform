@@ -30,11 +30,11 @@ class DaoFactory:
             return ShootingDaoImpl()
         elif dao_type == 'CareJob':
             return careJob_dao_Impl()
-        elif dao_type == 'Medicines':
+        elif dao_type == 'Monitor':
             return Monitor_dao_Impl()
-        elif dao_type == 'Prevent':
+        elif dao_type == 'Monitoring_Equipment':
             return Monitoring_Equipment_dao_Impl()
-        elif dao_type == 'PestInfo':
+        elif dao_type == 'Monitoring_Personnel':
             return Monitoring_Personnel_dao_Impl() 
         else:
             return None
