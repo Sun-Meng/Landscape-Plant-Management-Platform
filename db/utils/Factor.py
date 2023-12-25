@@ -6,7 +6,9 @@ from db.DaoImpl.daoImpl_Y import *
 from db.DaoImpl.daoImpl_X import *
 class DaoFactory:
     def get_dao(dao_type):
-        if dao_type == 'Illustration':
+        if dao_type=='User':
+            return user_dao_Impl()
+        elif dao_type == 'Illustration':
             return IllustrationDaoImpl()
         elif dao_type == 'Usage':
             return UsageDaoImpl()

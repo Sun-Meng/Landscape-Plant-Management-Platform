@@ -53,3 +53,9 @@ class PlantZone(object):
         self.County = County
         self.create_time = create_time
         self.modified_time=modified_time
+        
+class User(object):
+     def __init__(self,id,psw,type):
+        self.id=id
+        self.psw=psw
+        self.type=type

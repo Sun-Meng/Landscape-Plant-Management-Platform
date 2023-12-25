@@ -13,7 +13,7 @@ from plantKnit.user.Higher import *
 from db.DaoImpl.daoImpl_X import Monitor_dao_Impl, Monitoring_Equipment_dao_Impl, Monitoring_Personnel_dao_Impl
 
 user=Higher()
-userID=1
+userID=1001
 #测试数据
 #查询个人养护任务（1）
 user.viewCare(userID)

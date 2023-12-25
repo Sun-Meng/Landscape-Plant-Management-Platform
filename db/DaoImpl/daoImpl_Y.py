@@ -1,4 +1,5 @@
 from datetime import datetime
+from sqlite3 import InterfaceError
 import sys
 sys.path.append("../..")
 import pandas as pd
@@ -192,7 +193,10 @@ class PreventDaoImpl(base_dao, PreventDao):
                 ''',(id,plantStatus,))
         results = self.cursor.fetchall()
         print(pd.DataFrame(list(results)).shape)    #用于验证是否成功读入数据库内容
-        self.cursor.close()
+        # try:
+        #     self.cursor.close()
+        # except InterfaceError as e:
+        #     end=e
         return results
 
 class PestInfoDaoImpl(base_dao, PestInfoDao):

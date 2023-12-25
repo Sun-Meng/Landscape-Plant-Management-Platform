@@ -85,4 +85,16 @@ class plant_Zone_dao(metaclass=abc.ABCMeta):
         pass
 
 
-# class user_dao()
+class user_dao(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def insert(self,User):
+        pass
+    @abc.abstractmethod
+    def update(self,User) :
+        pass
+    @abc.abstractmethod
+    def delete(self,User):
+        pass
+    @abc.abstractmethod
+    def select(self,sql) :
+        pass

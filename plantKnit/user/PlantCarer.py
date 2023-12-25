@@ -53,9 +53,20 @@ class PlantCarer(object):
             print('1.查看个人养护任务信息')
             print('2.结束')
             i=input('所执行业务ID:')
-            if(i==1):
+            if(i=="1"):
                 self.CareJob_lookUp()
-            elif(i==2):
+                while(True):
+                    print('-----个人任务界面-----')
+                    print('1.查看植物病害信息及其防治')
+                    print('2.结束')
+                    opt=input('所执行业务ID:')
+                    if(opt=="1"):
+                        self.CaringMethod_lookUp("unhealthy")
+                    elif(opt=="2"):
+                        break
+                    else:
+                        print('错误的执行ID') 
+            elif(i=="2"):
                 break
             else:
                 print('错误的执行ID')  

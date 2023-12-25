@@ -6,7 +6,7 @@ import pandas as pd
 
 from db.domain.domain_S import *
 
-from db.Dao.dao_S import careJob_dao, careWorker_dao, plant_Family_dao, plant_Genus_dao, plant_Species_dao, plant_Zone_dao
+from db.Dao.dao_S import *
 
 from db.utils.dao import *
 
@@ -66,7 +66,7 @@ class careJob_dao_Impl(base_dao,careJob_dao):
         cursor = self.connection.cursor()
         cursor.execute(
             '''
-                SELECT JobID,JobTitle,date,location,p.Name,PestName,HealthStatus,RegularJob,result 
+                SELECT JobID,JobTitle,date,location,p.Name,HealthStatus,RegularJob,result 
                 FROM CareWorker as wk 
                     inner join CareJob as job on job.workerID=wk.workerID 
                     inner join Plants as p on p.PlantID=job.PlantID 
@@ -277,3 +277,57 @@ class plant_Zone_dao_Impl(base_dao,plant_Zone_dao):
         cursor.execute(sql)
         #self.connection.commit()
         cursor.close()
+
+class user_dao_Impl(base_dao,user_dao):
+
+    def __init__(self):
+        self.connection = self.get_conn()
+
+    def insert(self,User):
+        cursor = self.connection.cursor()
+        cursor.execute("INSERT INTO [User] VALUES (%s,%s,%s)",(User.id,User.psw,User.type))
+        #self.connection.commit()
+        cursor.close()
+    
+    def update(self,User) :
+        cursor = self.connection.cursor()
+        #插入sql
+        cursor.execute("UPDATE [User] SET  id=%s, psw=%s,type=%s",(User.id,User.psw,User.type))
+        #self.connection.commit()
+        cursor.close()
+    
+    def delete(self,userID):
+        cursor = self.connection.cursor()
+        #插入sql
+        cursor.execute("DELETE FROM [User] WHERE id=%s", (userID,))
+        #self.connection.commit()
+        cursor.close()
+  
+    def select(self,sql) :
+        cursor = self.connection.cursor()
+        #插入sql
+        cursor.execute(sql)
+        #self.connection.commit()
+        cursor.close()
+
+    def login(self, userId, password):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT COUNT(*) FROM [User] WHERE id = %s AND psw = %s", (userId, password,))
+        count = cursor.fetchone()[0]
+        if count == 1:
+            return True
+        else:
+            return False
+
+    def type(self, userId=None, password=None):
+        if userId is None or password is None:
+            return None
+
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT type FROM [User] WHERE id = %s AND psw = %s", (userId, password,))
+
+        result = cursor.fetchone()
+        if result is not None:
+            return result[0]
+        else:
+            return None
