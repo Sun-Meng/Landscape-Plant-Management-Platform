@@ -7,5 +7,5 @@ from db.utils.Factor import *
 class Higher(object):
     def __init__(self):
         factory=DaoFactory()
-        self.Higher=factory.getDao("Higher")
+        self.Higher=factory.get_Dao("Higher")
         

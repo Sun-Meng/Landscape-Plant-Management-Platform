@@ -7,5 +7,5 @@ from db.utils.Factor import *
 class Monitor(object):
     def __init__(self):
         factory=DaoFactory()
-        self.Monitor=factory.getDao("Monitor")
+        self.Monitor=factory.get_Dao("Monitor")
         
