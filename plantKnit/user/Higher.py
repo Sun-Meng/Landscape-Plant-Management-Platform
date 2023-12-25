@@ -8,27 +8,30 @@ from db.DaoImpl.daoImpl_X import *
 from db.utils.Factor import *
 class Higher(object):
     def __init__(self):
-        factory=DaoFactory()
-        self.careJob=factory.get_Dao("careJob")
-        self.careWorker=factory.get_Dao("careWorker")
-        self.Monitoring_Personnel=factory.get_Dao("Monitoring_Personnel")
+        factory=DaoFactory
+        self.careJob=factory.get_dao("Monitor")
+        self.careWorker=factory.get_dao("Monitoring_Equipment")
+        self.Monitoring_Personnel=factory.get_dao("Monitoring_Personnel")
     
     def viewCare(self,id):
         temp=self.careJob.select(id)
         if(temp!=None):
-            print(vars(temp))
+            for i in temp:
+                print(i)
         else:print("id有误")
         
     def viewCareWorker(self,id):
         temp=self.careWorker.select(id)
         if(temp!=None):
-            print(vars(temp))
+            for i in temp:
+                print(i)
         else:print("id有误")
         
     def viewMonitoring_Personnel(self,id):
         temp=self.Monitoring_Personnel.select(id)
         if(temp!=None):
-            print(vars(temp))
+            for i in temp:
+                print(i)
         else:print("id有误")
         
     def combineSearch(self,id):

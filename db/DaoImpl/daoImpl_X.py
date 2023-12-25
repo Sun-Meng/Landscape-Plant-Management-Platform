@@ -32,9 +32,9 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
         self.connection.commit()
         cursor.close()
 
-    def select(self,sql):
+    def select(self,resultID):
         cursor = self.connection.cursor()
-        cursor.execute(sql)
+        cursor.execute("SELECT * FROM Monitor WHERE resultID=%s", (resultID,))
         result = cursor.fetchall()
         cursor.close()
         return result
@@ -63,9 +63,9 @@ class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
         self.connection.commit()
         cursor.close()
 
-    def select(self,sql):
+    def select(self,equipmentID):
         cursor = self.connection.cursor()
-        cursor.execute(sql)
+        cursor.execute("SELECT * FROM Monitoring_Equipment WHERE equipmentID=%s", (equipmentID,))
         result = cursor.fetchall()
         cursor.close()
         return result
@@ -94,9 +94,9 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
         self.connection.commit()
         cursor.close()
 
-    def select(self):
+    def select(self,PersonID):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM Monitoring_Personnel WHERE personID = 1000")#里面加入, (Monitoring_Personnel.personID)
+        cursor.execute("SELECT * FROM Monitoring_Personnel WHERE PersonID=%s", (PersonID,))
         result = cursor.fetchall()
         print(pd.DataFrame(list(result)).shape)
         cursor.close()

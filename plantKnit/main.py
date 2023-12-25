@@ -1,4 +1,6 @@
 import sys
+import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append("..")
 from db.DaoImpl.daoImpl_S import *
 from db.DaoImpl.daoImpl_Y import *
