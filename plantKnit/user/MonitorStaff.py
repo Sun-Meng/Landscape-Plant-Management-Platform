@@ -16,7 +16,7 @@ class MonitorStaff(object):
         entity_class = Monitor  # 可根据需求选择其他实体类
 
         data_list = []
-        header = "resultID,HealthStatus,name,create_time,update_time,PlantID,equipmentID"
+        header = "resultID,PlantID,equipmentID,HealthStatus,name,create_time,update_time"
         print(f"请按照以下格式逐行输入数据（输入 'quit' 结束录入）:\n{header}")
 
         while True:
