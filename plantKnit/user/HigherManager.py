@@ -93,25 +93,25 @@ class HigherManager(base_dao):
             print('3.查看植物的所有养护、分类、基本信息')
             print('4.结束')
             i=input('所执行业务ID：')
-            if(i==1):
+            if(i=="1"):
                 self.viewCare(input('任务ID'))
-            elif(i==2):
-                print('-----2.查看工作人员信息-----')
+            elif(i=="2"):
+                print('-----查看工作人员信息-----')
                 print('1.查看养护人员信息')
                 print('2.查看监测人员信息')
                 print('3.结束')
                 j=input('所执行业务ID：')
-                if(j==1):
+                if(j=="1"):
                     self.viewCareWorker(input('人员ID'))
-                elif(j==2):
+                elif(j=="2"):
                     self.viewMonitoring_Personnel(input('人员ID'))
-                elif(j==3):
+                elif(j=="3"):
                     break
                 else:
                     print('错误的执行ID')
-            elif(i==3):
+            elif(i=="3"):
                 self.combineSearch(input('植物ID'))
-            elif(i==4):
+            elif(i=="4"):
                 break
             else:
                 print('错误的执行ID')
