@@ -85,12 +85,12 @@ class Admin(base_dao):
                 import_csv_to_database("careJob.csv",careJob_dao_Impl(), CareJob)
             elif(i=="4"):
                 import_csv_to_database("pestInfo.csv",PestInfoDaoImpl(),PestInfo)
+                import_csv_to_database("medicines.csv",MedicinesDaoImpl(),Medicines)
                 import_csv_to_database("prevent.csv",PreventDaoImpl(),Prevent)
                 import_csv_to_database("usage.csv",UsageDaoImpl(),Usage)
-                import_csv_to_database("medicines.csv",MedicinesDaoImpl(),Medicines)
             elif(i=="5"):
-                import_csv_to_database("Monitoring_Equipment.csv",Monitoring_Equipment_dao_Impl(), Monitoring_Equipment)
                 import_csv_to_database("Monitoring_Personnel.csv",Monitoring_Personnel_dao_Impl(), Monitoring_Personnel)
+                import_csv_to_database("Monitoring_Equipment.csv",Monitoring_Equipment_dao_Impl(), Monitoring_Equipment)
             elif(i=="6"):
                 import_csv_to_database("user.csv",user_dao_Impl(),User)
             elif(i=="7"):
@@ -123,16 +123,32 @@ class Admin(base_dao):
                 self.plants.update(plants)
             elif(i=="5"):
                 family=PlantFamily(input('科ID:'),input('科名:'),input('科描述:'))
-                self.family.update(family)
+                if(self.family.update(family)):
+                    print("科信息更新成功！")
+                    print()
+                else:
+                    break
             elif(i=="6"):
                 genus=PlantGenus(input('种ID:'),input('种名:'),input('种描述:'))
-                self.genus.update(genus)
+                if(self.genus.update(genus)):
+                    print("种信息更新成功！")
+                    print()
+                else:
+                    break
             elif(i=="7"):
                 species=PlantSpecies(input('属ID:'),input('属名:'),input('属描述:'))
-                self.species.update(species)
+                if(self.species.update(species)):
+                    print("类信息更新成功！")
+                    print()
+                else:
+                    break
             elif(i=="8"):
                 zone=PlantZone(input('区域id:'),input('省：'),input('市：'),input('县/乡：'),datetime.now(),datetime.now())
-                self.zone.update(zone)
+                if(self.zone.update(zone)):
+                    print("分布区域信息更新成功！")
+                    print()
+                else:
+                    break
             elif(i=="9"):
                 self.setConfigInfo()
             elif(i=="10"):

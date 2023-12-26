@@ -5,7 +5,6 @@ import pandas as pd
 from db.domain import *
 from db.dao import *
 from db.utils.BaseDao import *
-from sqlite3 import InterfaceError
 
 
 class careJob_dao_Impl(base_dao,careJob_dao):
@@ -24,15 +23,15 @@ class careJob_dao_Impl(base_dao,careJob_dao):
     def delete(self,CareJobID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM CareJob WHERE CareJobID=%s", (CareJobID,))
+        cursor.execute("DELETE FROM CareJob WHERE CareJobID=%s", (CareJobID))
         #self.connection.commit()
         cursor.close()
     
     def update(self,CareJob):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE CareJob SET JobID=%s, WorkerID=%s, PlantID=%s,Name=%s,Date=%s,Location=%s,RegularJob=%s,Result=%s,modified_time=%s",
-                                (CareJob.JobID, CareJob.WorkerID,CareJob.PlantID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.modified_time))
+        cursor.execute("UPDATE CareJob SET WorkerID=%s, PlantID=%s,Name=%s,Date=%s,Location=%s,RegularJob=%s,Result=%s,modified_time=%s WHERE JobID=%s",
+                                (CareJob.WorkerID,CareJob.PlantID, CareJob.Name,CareJob.Date,CareJob.Location,CareJob.RegularJob,CareJob.Result,CareJob.modified_time,CareJob.JobID))
         # self.conn.commit()
         cursor.close()
 
@@ -78,20 +77,6 @@ class careJob_dao_Impl(base_dao,careJob_dao):
         cursor.close()
         return results
     
-    #只返回 养护结果
-    #format : 任务id 任务名称 任务日期 任务地点 目标植物 植物健康状况 养护人 完成情况 完成时间
-    # def select_caring_result(self):
-    #     cursor = self.connection.cursor()
-    #     sql='''
-    #         SELECT JobID,JobTitle,date,location,p.Name,HealthStatus,worker_name,result,
-    #         FROM CareJob as job 
-    #             inner join CareWorker as cw on job.workerID=cw.workerID
-    #             inner join Plants as p on p.PlantID=job.PlantID
-    #             inner join Monitor as m on m.PlantID=p.PlantID 
-    #     '''
-    #     cursor.execute(sql)
-    #     results = cursor.fetchall()
-    #     return results
 
 
 class careWorker_dao_Impl(base_dao,careWorker_dao):
@@ -109,15 +94,15 @@ class careWorker_dao_Impl(base_dao,careWorker_dao):
     
     def update(self,CareWorker) :
         cursor = self.connection.cursor()
-        cursor.execute("UPDATE CareWorker SET WorkerID=%s, Name=%s,Sex=%s,Birth=%s,Tel=%s,modified_time=%s",
-                                (CareWorker.ID, CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.modified_time))
+        cursor.execute("UPDATE CareWorker SET Name=%s,Sex=%s,Birth=%s,Tel=%s,modified_time=%s WHERE WorkerID=%s",
+                                (CareWorker.Name,CareWorker.Sex,CareWorker.Birth,CareWorker.Tel,CareWorker.modified_time,CareWorker.ID))
         #self.connection.commit()
         cursor.close()
    
     def delete(self,CareWorkerID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM CareWorker WHERE CareWorkerID=%s", (CareWorkerID,))
+        cursor.execute("DELETE FROM CareWorker WHERE CareWorkerID=%s", (CareWorkerID))
         #self.connection.commit()
         cursor.close()
     
@@ -143,18 +128,22 @@ class plant_Family_dao_Impl(base_dao,plant_Family_dao):
         #self.connection.commit()
         cursor.close()
     
-    def update(self,PlantFamily) :
-        cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute("UPDATE Plant_Family SET  id=%s, name=%s,info=%s",
-                                ( PlantFamily.id, PlantFamily.name,PlantFamily.info))
-        #self.connection.commit()
-        cursor.close()
+    def update(self,PlantFamily)->bool:
+        try:
+            cursor = self.connection.cursor()
+            #插入sql
+            cursor.execute("UPDATE Plant_Family SET  name=%s,info=%s WHERE id=%s"  ,
+                                    (PlantFamily.name,PlantFamily.info,PlantFamily.id))
+            #self.connection.commit()
+            cursor.close()
+            return True
+        except:
+            return False
     
     def delete(self,PlantFamilyID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Family WHERE id=%s", (PlantFamilyID,))
+        cursor.execute("DELETE FROM Plant_Family WHERE id=%s", (PlantFamilyID))
         #self.connection.commit()
         cursor.close()
   
@@ -177,19 +166,23 @@ class plant_Genus_dao_Impl(base_dao,plant_Genus_dao):
         #self.connection.commit()
         cursor.close()
     
-    def update(self,PlantGenus) :
-        cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute("UPDATE Plant_Genus SET  id=%s, name=%s,info=%s",
-                                ( PlantGenus.id, PlantGenus.name,PlantGenus.info))
+    def update(self,PlantGenus)->bool:
+        try:
+            cursor = self.connection.cursor()
+            #插入sql
+            cursor.execute("UPDATE Plant_Genus SET name=%s,info=%s WHERE id=%s",
+                                    (PlantGenus.name,PlantGenus.info, PlantGenus.id))
 
-        #self.connection.commit()
-        cursor.close()
+            #self.connection.commit()
+            cursor.close()
+            return True
+        except:
+            return False
     
     def delete(self,PlantGenusID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Genus WHERE id=%s", (PlantGenusID,))
+        cursor.execute("DELETE FROM Plant_Genus WHERE id=%s", (PlantGenusID))
 
         #self.connection.commit()
         cursor.close()
@@ -213,19 +206,21 @@ class plant_Species_dao_Impl(base_dao,plant_Species_dao):
         #self.connection.commit()
         cursor.close()
     
-    def update(self,PlantSpecies) :
-        cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute("UPDATE Plant_Species SET  id=%s, name=%s,info=%s",
-                                (PlantSpecies.id, PlantSpecies.name,PlantSpecies.info))
-
-        #self.connection.commit()
-        cursor.close()
-    
+    def update(self,PlantSpecies)->bool :
+        try:
+            cursor = self.connection.cursor()
+            #插入sql
+            cursor.execute("UPDATE Plant_Species SET name=%s,info=%s, id=%s",
+                                    (PlantSpecies.name,PlantSpecies.info,PlantSpecies.id))
+            #self.connection.commit()
+            cursor.close()
+            return True
+        except:
+            return False
     def delete(self,PlantSpeciesID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Species WHERE id=%s", (PlantSpeciesID,))
+        cursor.execute("DELETE FROM Plant_Species WHERE id=%s", (PlantSpeciesID))
 
         #self.connection.commit()
         cursor.close()
@@ -249,19 +244,22 @@ class plant_Zone_dao_Impl(base_dao,plant_Zone_dao):
         #self.connection.commit()
         cursor.close()
     
-    def update(self,PlantZone) :
-        cursor = self.connection.cursor()
-        #插入sql
-        cursor.execute("UPDATE Plant_Zone SET  ZoneID=%s, prov=%s,city=%s,county=%s,modified_time=%s",
-                                ( PlantZone.ZoneID, PlantZone.Prov,PlantZone.City,PlantZone.County,PlantZone.modified_time))
-
-        #self.connection.commit()
-        cursor.close()
+    def update(self,PlantZone)->bool:
+        try:
+            cursor = self.connection.cursor()
+            #插入sql
+            cursor.execute("UPDATE Plant_Zone SET  prov=%s,city=%s,county=%s,modified_time=%s WHERE ZoneID=%s",
+                                    (PlantZone.Prov,PlantZone.City,PlantZone.County,PlantZone.modified_time,PlantZone.ZoneID))
+            #self.connection.commit()
+            cursor.close()
+            return True
+        except:
+            return False     
     
     def delete(self,PlantZoneID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM Plant_Zone WHERE id=%s", (PlantZoneID,))
+        cursor.execute("DELETE FROM Plant_Zone WHERE id=%s", (PlantZoneID))
 
         #self.connection.commit()
         cursor.close()
@@ -287,14 +285,14 @@ class user_dao_Impl(base_dao,user_dao):
     def update(self,User) :
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("UPDATE [User] SET  id=%s, psw=%s,type=%s",(User.id,User.psw,User.type))
+        cursor.execute("UPDATE [User] SET psw=%s,type=%s WHERE id=%s",(User.psw,User.type,User.id))
         #self.connection.commit()
         cursor.close()
     
     def delete(self,userID):
         cursor = self.connection.cursor()
         #插入sql
-        cursor.execute("DELETE FROM [User] WHERE id=%s", (userID,))
+        cursor.execute("DELETE FROM [User] WHERE id=%s", (userID))
         #self.connection.commit()
         cursor.close()
   
@@ -307,7 +305,7 @@ class user_dao_Impl(base_dao,user_dao):
 
     def login(self, userId, password):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT COUNT(*) FROM [User] WHERE id = %s AND psw = %s", (userId, password,))
+        cursor.execute("SELECT COUNT(*) FROM [User] WHERE id = %s AND psw = %s", (userId, password))
         count = cursor.fetchone()[0]
         if count == 1:
             return True
@@ -319,7 +317,7 @@ class user_dao_Impl(base_dao,user_dao):
             return None
 
         cursor = self.connection.cursor()
-        cursor.execute("SELECT type FROM [User] WHERE id = %s AND psw = %s", (userId, password,))
+        cursor.execute("SELECT type FROM [User] WHERE id = %s AND psw = %s", (userId, password))
 
         result = cursor.fetchone()
         if result is not None:
@@ -353,7 +351,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
     def select(self,resultID):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM Monitor WHERE resultID=%s", (resultID,))
+        cursor.execute("SELECT * FROM Monitor WHERE resultID=%s", (resultID))
         result = cursor.fetchall()
         cursor.close()
         return result
@@ -366,7 +364,7 @@ class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
 
     def insert(self,Monitoring_Equipment) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitoring_Equipment values(%s,%s,%s,%s)",(Monitoring_Equipment.equipmentID,Monitoring_Equipment.time,Monitoring_Equipment.place,Monitoring_Equipment.object))
+        cursor.execute("insert into Monitoring_Equipment values(%s,%s,%s,%s,%s)",(Monitoring_Equipment.equipmentID,Monitoring_Equipment.time,Monitoring_Equipment.place,Monitoring_Equipment.object,Monitoring_Equipment.personID))
         self.connection.commit()
         cursor.close()
 
@@ -384,7 +382,7 @@ class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
 
     def select(self,equipmentID):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM Monitoring_Equipment WHERE equipmentID=%s", (equipmentID,))
+        cursor.execute("SELECT * FROM Monitoring_Equipment WHERE equipmentID=%s", (equipmentID))
         result = cursor.fetchall()
         cursor.close()
         return result
@@ -415,7 +413,7 @@ class Monitoring_Personnel_dao_Impl(base_dao,Monitoring_Personnel_dao):
 
     def select(self,PersonID):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM Monitoring_Personnel WHERE PersonID=%s", (PersonID,))
+        cursor.execute("SELECT * FROM Monitoring_Personnel WHERE PersonID=%s", (PersonID))
         result = cursor.fetchall()
         cursor.close()
         return result
@@ -447,7 +445,7 @@ class IllustrationDaoImpl(base_dao,IllustrationDao):
     def delete(self,IllustrationID) -> bool:
         try:
             cursor = self.connection.cursor()
-            cursor.execute("DELETE FROM Illustration WHERE IllustrationID=%s", (IllustrationID,))
+            cursor.execute("DELETE FROM Illustration WHERE IllustrationID=%s", (IllustrationID))
             # self.conn.commit()
             return True
         except Exception as e:
@@ -457,8 +455,8 @@ class IllustrationDaoImpl(base_dao,IllustrationDao):
     def update(self, Illustration) -> bool:
         try:
             cursor = self.connection.cursor()
-            cursor.execute("UPDATE Illustration SET IllustrationID=%s, IllustrationDescription=%s, IllustrationName=%s",
-                                (Illustration.IllustrationID, Illustration.IllustrationDescription,  Illustration.IllustrationName))
+            cursor.execute("UPDATE Illustration SET IllustrationDescription=%s, IllustrationName=%s WHERE IllustrationID=%s",
+                                (Illustration.IllustrationDescription, Illustration.IllustrationName,Illustration.IllustrationID))
             # self.conn.commit()
             return True
         except Exception as e:
@@ -467,7 +465,7 @@ class IllustrationDaoImpl(base_dao,IllustrationDao):
 
     def select(self, IllustrationID):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM Illustration WHERE IllustrationID=%s", (IllustrationID,))
+        cursor.execute("SELECT * FROM Illustration WHERE IllustrationID=%s", (IllustrationID))
         result = cursor.fetchone()
         if result:
             return Illustration(result[0], result[1], result[2])
@@ -482,7 +480,7 @@ class UsageDaoImpl(base_dao,UsageDao):
         try:
             self.cursor.execute ("INSERT INTO Usage VALUES (%s, %s, %s, %s)",
                                 (Usage.UsageID, Usage.Dosage, Usage.PestID,Usage.MedicineID))
-            self.conn.commit()
+            # self.connection.commit()
             return True
         except Exception as e:
             print(e)
@@ -490,7 +488,7 @@ class UsageDaoImpl(base_dao,UsageDao):
         
     def delete(self,UsageID) -> bool:
         try:
-            self.cursor.execute("DELETE FROM Usage WHERE UsageID=%s", (UsageID,))
+            self.cursor.execute("DELETE FROM Usage WHERE UsageID=%s", (UsageID))
             self.conn.commit()
             return True
         except Exception as e:
@@ -499,8 +497,8 @@ class UsageDaoImpl(base_dao,UsageDao):
 
     def update(self, Usage:Usage) -> bool:
         try:
-            self.cursor.execute("UPDATE Usage SET UsageID=%s, PestID=%s, MedicineID=%s",
-                                (Usage.UsageID, Usage.Dosage,  Usage.PestID,Usage.MedicineID))
+            self.cursor.execute("UPDATE Usage SET Dosage=%s,PestID=%s, MedicineID=%s WHERE UsageID=%s",
+                                (Usage.Dosage, Usage.PestID,Usage.MedicineID,Usage.UsageID))
             self.conn.commit()
             return True
         except Exception as e:
@@ -508,7 +506,7 @@ class UsageDaoImpl(base_dao,UsageDao):
             return False
 
     def select(self, UsageID):
-        self.cursor.execute("SELECT * FROM Usage WHERE UsageID=%s", (UsageID,))
+        self.cursor.execute("SELECT * FROM Usage WHERE UsageID=%s", (UsageID))
         result = self.cursor.fetchone()
         if result:
             return Usage(result[0], result[1], result[2], result[3])
@@ -532,7 +530,7 @@ class MedicinesDaoImpl(base_dao, MedicinesDao):
 
     def delete(self, MedicineID) -> bool:
         try:
-            self.cursor.execute("DELETE FROM Medicines WHERE MedicineID=%s", (MedicineID,))
+            self.cursor.execute("DELETE FROM Medicines WHERE MedicineID=%s", (MedicineID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -541,8 +539,8 @@ class MedicinesDaoImpl(base_dao, MedicinesDao):
 
     def update(self, medicine: Medicines) -> bool:
         try:
-            self.cursor.execute("UPDATE Medicines SET MedicineID=%s, MedicineName=%s, ExpirationPeriod=%s",
-                                (medicine.MedicineID, medicine.MedicineName, medicine.ExpirationPeriod))
+            self.cursor.execute("UPDATE Medicines SET MedicineName=%s, ExpirationPeriod=%s WHERE MedicineID=%s ",
+                                (medicine.MedicineName, medicine.ExpirationPeriod,medicine.MedicineID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -550,7 +548,7 @@ class MedicinesDaoImpl(base_dao, MedicinesDao):
             return False
 
     def select(self, MedicineID):
-        self.cursor.execute("SELECT * FROM Medicines WHERE MedicineID=%s", (MedicineID,))
+        self.cursor.execute("SELECT * FROM Medicines WHERE MedicineID=%s", (MedicineID))
         result = self.cursor.fetchone()
         if result:
             return Medicines(result[0], result[1], result[2])
@@ -575,7 +573,7 @@ class PreventDaoImpl(base_dao, PreventDao):
 
     def delete(self, MeasureID) -> bool:
         try:
-            self.cursor.execute("DELETE FROM Prevent WHERE MeasureID=%s", (MeasureID,))
+            self.cursor.execute("DELETE FROM Prevent WHERE MeasureID=%s", (MeasureID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -584,8 +582,8 @@ class PreventDaoImpl(base_dao, PreventDao):
 
     def update(self, prevent: Prevent) -> bool:
         try:
-            self.cursor.execute("UPDATE Prevent SET MeasureID=%s, PlantID=%s, PestID=%s",
-                                (prevent.MeasureID, prevent.PlantID, prevent.PestID))
+            self.cursor.execute("UPDATE Prevent SET PlantID=%s, PestID=%s WHERE MeasureID=%s",
+                                (prevent.PlantID, prevent.PestID,prevent.MeasureID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -593,7 +591,7 @@ class PreventDaoImpl(base_dao, PreventDao):
             return False
 
     def select(self, MeasureID):
-        self.cursor.execute("SELECT * FROM Prevent WHERE MeasureID=%s", (MeasureID,))
+        self.cursor.execute("SELECT * FROM Prevent WHERE MeasureID=%s", (MeasureID))
         result = self.cursor.fetchone()
         if result:
             return Prevent(result[0], result[1], result[2])
@@ -639,7 +637,7 @@ class PestInfoDaoImpl(base_dao, PestInfoDao):
 
     def delete(self, PestID) -> bool:
         try:
-            self.cursor.execute("DELETE FROM PestInfo WHERE PestID=%s", (PestID,))
+            self.cursor.execute("DELETE FROM PestInfo WHERE PestID=%s", (PestID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -648,8 +646,8 @@ class PestInfoDaoImpl(base_dao, PestInfoDao):
 
     def update(self, pest_info: PestInfo) -> bool:
         try:
-            self.cursor.execute("UPDATE PestInfo SET PestID=%s, PestName=%s, PreventionMethod=%s",
-                                (pest_info.PestID, pest_info.PestName, pest_info.PreventionMethod))
+            self.cursor.execute("UPDATE PestInfo SET PestName=%s, PreventionMethod=%s WHERE PestID=%s",
+                                (pest_info.PestName, pest_info.PreventionMethod, pest_info.PestID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -657,7 +655,7 @@ class PestInfoDaoImpl(base_dao, PestInfoDao):
             return False
 
     def select(self, PestID):
-        self.cursor.execute("SELECT * FROM PestInfo WHERE PestID=%s", (PestID,))
+        self.cursor.execute("SELECT * FROM PestInfo WHERE PestID=%s", (PestID))
         result = self.cursor.fetchone()
         if result:
             return PestInfo(result[0], result[1], result[2])
@@ -682,7 +680,7 @@ class PlantsDaoImpl(base_dao, PlantsDao):
 
     def delete(self, PlantID) -> bool:
         try:
-            self.cursor.execute("DELETE FROM Plants WHERE PlantID=%s", (PlantID,))
+            self.cursor.execute("DELETE FROM Plants WHERE PlantID=%s", (PlantID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -691,16 +689,16 @@ class PlantsDaoImpl(base_dao, PlantsDao):
 
     def update(self, plant: Plants) -> bool:
         try:
-            self.cursor.execute("UPDATE Plants SET PlantID=%s, Alias=%s, MorphologicalFeatures=%s, CultivationKeyPoints=%s, ApplicationValue=%s, PlantIntroduction=%s, Creator=%s, CreationTime=%s, UpdateTime=%s",
-                                (plant.PlantID, plant.Alias, plant.MorphologicalFeatures, plant.CultivationKeyPoints, plant.ApplicationValue, plant.PlantIntroduction, plant.Creator, plant.CreationTime, plant.UpdateTime))
-            self.connection.commit()
+            self.cursor.execute("UPDATE Plants SET Name=%s, Alias=%s, MorphologicalFeatures=%s, CultivationKeyPoints=%s, ApplicationValue=%s, PlantIntroduction=%s, Creator=%s,FamilyID=%s,GenusID=%s,SpeciesID=%s,ZoneID=%s,CreationTime=%s, UpdateTime=%s WHERE PlantID=%s",
+                                (plant.Name,plant.Alias, plant.MorphologicalFeatures, plant.CultivationKeyPoints, plant.ApplicationValue, plant.PlantIntroduction, plant.Creator,plant.FamilyID,plant.GenusID,plant.SpeciesID,plant.ZoneID,plant.CreationTime,plant.UpdateTime,plant.PlantID ))
+            # self.connection.commit()
             return True
         except Exception as e:
             print(e)
             return False
 
     def select(self, PlantID):
-        self.cursor.execute("SELECT * FROM Plants WHERE PlantID=%s", (PlantID,))
+        self.cursor.execute("SELECT * FROM Plants WHERE PlantID=%s", (PlantID))
         result = self.cursor.fetchone()
         if result:
             return Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8],result[9],result[10],result[11],result[12],result[13])
@@ -730,7 +728,7 @@ class ShootingDaoImpl(base_dao, ShootingDao):
 
     def delete(self, ShootingID) -> bool:
         try:
-            self.cursor.execute("DELETE FROM Shooting WHERE ShootingID=%s", (ShootingID,))
+            self.cursor.execute("DELETE FROM Shooting WHERE ShootingID=%s", (ShootingID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -739,8 +737,8 @@ class ShootingDaoImpl(base_dao, ShootingDao):
 
     def update(self, shooting: Shooting) -> bool:
         try:
-            self.cursor.execute("UPDATE Shooting SET ShootingID=%s, ShootingLocation=%s, Photographer=%s, PlantID=%s, IllustrationID=%s",
-                                (shooting.ShootingID, shooting.ShootingLocation, shooting.Photographer, shooting.PlantID, shooting.IllustrationID))
+            self.cursor.execute("UPDATE Shooting SET ShootingLocation=%s, Photographer=%s, PlantID=%s, IllustrationID=%s WHERE ShootingID=%s",
+                                (shooting.ShootingLocation, shooting.Photographer, shooting.PlantID, shooting.IllustrationID,shooting.ShootingID))
             self.connection.commit()
             return True
         except Exception as e:
@@ -748,7 +746,7 @@ class ShootingDaoImpl(base_dao, ShootingDao):
             return False
 
     def select(self, ShootingID):
-        self.cursor.execute("SELECT * FROM Shooting WHERE ShootingID=%s", (ShootingID,))
+        self.cursor.execute("SELECT * FROM Shooting WHERE ShootingID=%s", (ShootingID))
         result = self.cursor.fetchone()
         if result:
             return Shooting(result[0], result[1], result[2], result[3], result[4])

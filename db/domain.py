@@ -92,11 +92,12 @@ class Monitor(object):
         return self.equipmentID
 
 class Monitoring_Equipment(object):
-    def __init__(self, equipmentID, time, place, object):
+    def __init__(self, equipmentID, time, place, object,personID):
         self.equipmentID = equipmentID
         self.time = time
         self.place = place
         self.object = object
+        self.personID=personID
         
     def get_equipmentID(self):
         return self.equipmentID
