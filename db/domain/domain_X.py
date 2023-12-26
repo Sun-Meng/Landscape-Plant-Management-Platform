@@ -1,12 +1,18 @@
 class Monitor(object):
-    def __init__(self, resultID, name, create_time, update_time):
+    def __init__(self, resultID, HealthStatus, name, create_time, update_time, PlantID, equipmentID):
         self.resultID = resultID
+        self.HealthStatus = HealthStatus
         self.name = name
         self.create_time = create_time
         self.update_time = update_time
+        self.PlantID = PlantID
+        self.equipmentID = equipmentID
         
     def get_resultID(self):
         return self.resultID
+    
+    def get_HealthStatus(self):
+        return self.HealthStatus
     
     def get_name(self):
         return self.name
@@ -16,6 +22,12 @@ class Monitor(object):
     
     def get_update_time(self):
         return self.update_time
+    
+    def get_PlantID(self):
+        return self.PlantID
+    
+    def get_equipmentID(self):
+        return self.equipmentID
 
 class Monitoring_Equipment(object):
     def __init__(self, equipmentID, time, place, object):

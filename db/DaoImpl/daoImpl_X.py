@@ -16,7 +16,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
     def insert(self,Monitor) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitor values(%s,%s,%s,%s)",(Monitor.resultID,Monitor.name,Monitor.create_time,Monitor.update_time))
+        cursor.execute("insert into Monitor values(%s,%s,%s,%s,%s,%s,%s)",(Monitor.resultID,Monitor.HealthStatus,Monitor.name,Monitor.create_time,Monitor.update_time,Monitor.PlantID,Monitor.equipmentID))
         self.connection.commit()
         cursor.close()
 
@@ -28,7 +28,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
     
     def update(self,Monitor):
         cursor = self.connection.cursor()
-        cursor.execute("update Monitor set name = %s, create_time = %s, update_time = %s where resultID = %s",(Monitor.name, Monitor.create_time, Monitor.update_time, Monitor.resultID))
+        cursor.execute("update Monitor set HealthStatus = %s, name = %s, create_time = %s, update_time = %s, PlantID = %s, equipmentID = %s where resultID = %s",(Monitor.HealthStatus, Monitor.name, Monitor.create_time, Monitor.update_time, Monitor.PlantID, Monitor.equipmentID, Monitor.resultID))
         self.connection.commit()
         cursor.close()
 
