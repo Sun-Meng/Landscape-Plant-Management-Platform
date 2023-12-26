@@ -2,12 +2,12 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 import sys
 sys.path.append("../..")
-from db.DaoImpl.daoImpl_Y import *
-from db.domain.domain_Y import *
-from db.domain.domain_S import *
+from db.daoImpl import *
+from db.domain import *
+from db.domain import *
 from db.utils.loading import import_csv_to_database
 from plantKnit.user.PlantCarer import *
-from db.DaoImpl.daoImpl_S import careJob_dao_Impl, careWorker_dao_Impl
+from db.daoImpl import careJob_dao_Impl, careWorker_dao_Impl
 
 userID=233   #对应数据里的 刘立
 user=PlantCarer(userID)

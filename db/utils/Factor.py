@@ -1,9 +1,7 @@
 import sys
 
 sys.path.append("../..")
-from db.DaoImpl.daoImpl_S import *
-from db.DaoImpl.daoImpl_Y import *
-from db.DaoImpl.daoImpl_X import *
+from db.daoImpl import *
 class DaoFactory:
     def get_dao(dao_type):
         if dao_type=='User':

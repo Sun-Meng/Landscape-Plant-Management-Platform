@@ -4,8 +4,8 @@ from datetime import datetime
 from plantKnit.user.Admin import *
 
 from db.utils.dao import *
-from db.domain.domain_Y import *
-from db.DaoImpl.daoImpl_Y import *
+from db.domain import *
+from db.daoImpl import *
 a=IllustrationDaoImpl()
 IllustrationID="001"
 IllustrationDescription="good"

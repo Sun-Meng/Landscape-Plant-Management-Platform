@@ -2,15 +2,11 @@ import sys
 import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append("../..")
-from db.DaoImpl.daoImpl_S import *
-from db.DaoImpl.daoImpl_Y import *
-from db.DaoImpl.daoImpl_X import *
-from db.domain.domain_Y import *
-from db.domain.domain_S import *
-from db.domain.domain_X import *
+from db.daoImpl import *
+from db.domain import *
 from db.utils.loading import import_csv_to_database
 from plantKnit.user.HigherManager import *
-from db.DaoImpl.daoImpl_X import Monitor_dao_Impl, Monitoring_Equipment_dao_Impl, Monitoring_Personnel_dao_Impl
+
 
 user=HigherManager()
 userID=1001

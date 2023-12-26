@@ -1,9 +1,7 @@
 import sys
 sys.path.append("../..")
 from db.utils.loading import import_csv_to_database
-from db.DaoImpl.daoImpl_S import *
-from db.DaoImpl.daoImpl_Y import *
-from db.DaoImpl.daoImpl_X import *
+from db.daoImpl import *
 from db.utils.Factor import *
 from datetime import datetime
 class Admin(base_dao):
