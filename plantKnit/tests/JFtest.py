@@ -3,7 +3,7 @@ sys.path.append("../..")
 from datetime import datetime
 from plantKnit.user.Admin import *
 
-from db.utils.dao import *
+from db.utils.BaseDao import *
 from db.domain import *
 from db.daoImpl import *
 a=IllustrationDaoImpl()

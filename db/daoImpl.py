@@ -4,7 +4,7 @@ sys.path.append("../..")
 import pandas as pd
 from db.domain import *
 from db.dao import *
-from db.utils.dao import *
+from db.utils.BaseDao import *
 from sqlite3 import InterfaceError
 
 
