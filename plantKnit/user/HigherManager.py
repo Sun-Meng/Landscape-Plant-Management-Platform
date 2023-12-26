@@ -82,7 +82,6 @@ class HigherManager(base_dao):
                 CareJob.PlantID = (%s);
             ''', (id,))
         result = cursor.fetchone()
-        # 打印结果
         print(result)
     
     def menu(self):
