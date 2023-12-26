@@ -10,8 +10,6 @@ class PlantCarer(object):
         self.workerId=workerId
 
     def CareJob_lookUp(self):
-        name=self.careJob.select_workerName(self.workerId)
-        print(f"{name}'s Workplace")
         myJobs=self.careJob.select_by_id(self.workerId)
         for job in myJobs:
             print('''
@@ -45,7 +43,16 @@ class PlantCarer(object):
                     治理措施:%s, 
                     '''
                     %(job[0], job[1], job[2], job[3], job[4],job[5],job[6]))
+            
+    def executeJob(self):
+        if(self.careJob.update_JobStatus(self.workerId,"已完成")):
+            print("任务执行成功")
+        else:
+            print("任务执行失败")
+
     def menu(self):
+        name=self.careJob.select_workerName(self.workerId)
+        print(f"{name}'s Workplace")
         while(True):
             print('-----养护人员界面-----')
             print('1.查看个人养护任务信息')
@@ -56,11 +63,14 @@ class PlantCarer(object):
                 while(True):
                     print('-----个人任务界面-----')
                     print('1.查看植物病害信息及其防治')
-                    print('2.结束')
+                    print('2.执行养护任务')
+                    print('3.结束')
                     opt=input('所执行业务ID:')
                     if(opt=="1"):
                         self.CaringMethod_lookUp("unhealthy")
                     elif(opt=="2"):
+                        self.executeJob()
+                    elif(opt=="3"):
                         break
                     else:
                         print('错误的执行ID') 
