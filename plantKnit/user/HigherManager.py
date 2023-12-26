@@ -81,13 +81,13 @@ class HigherManager(base_dao):
                 Plants.CreationTime,
                 Plants.UpdateTime,
                 Plants.FamilyID,
-                Plant_Family.PlantID AS FamilyID,
+                Plant_Family.id AS FamilyID,
                 Plant_Family.name AS FamilyName,
                 Plant_Family.info AS FamilyInfo,
-                Plant_Genus.PlantID AS GenusID,
+                Plant_Genus.id AS GenusID,
                 Plant_Genus.name AS GenusName,
                 Plant_Genus.info AS GenusInfo,
-                Plant_Species.PlantID AS SpeciesID,
+                Plant_Species.id AS SpeciesID,
                 Plant_Species.name AS SpeciesName,
                 Plant_Species.info AS SpeciesInfo
             FROM 
@@ -95,9 +95,9 @@ class HigherManager(base_dao):
             JOIN 
                 Plants ON CareJob.PlantID = Plants.PlantID
             JOIN 
-                Plant_Family ON CareJob.PlantID = Plant_Family.PlantID
+                Plant_Family ON CareJob.PlantID = Plant_Family.id
             JOIN 
-                Plant_Genus ON Plants.GenusID = Plant_Genus.PlantID
+                Plant_Genus ON Plants.GenusID = Plant_Genus.id
             JOIN 
                 Plant_Species ON Plants.SpeciesID = Plant_Species.id
             WHERE 
