@@ -61,14 +61,15 @@ class User(object):
         self.type=type
         
 class Monitor(object):
-    def __init__(self, resultID, HealthStatus, name, create_time, update_time, PlantID, equipmentID):
+    def __init__(self, resultID, PlantID, equipmentID, HealthStatus, name, create_time, update_time):
         self.resultID = resultID
+        self.PlantID = PlantID
+        self.equipmentID = equipmentID
         self.HealthStatus = HealthStatus
         self.name = name
         self.create_time = create_time
         self.update_time = update_time
-        self.PlantID = PlantID
-        self.equipmentID = equipmentID
+        
         
     def get_resultID(self):
         return self.resultID

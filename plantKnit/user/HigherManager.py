@@ -14,11 +14,10 @@ class HigherManager(base_dao):
      
     def viewCare(self):
         CareResult='''
-            SELECT JobID,JobTitle,date,location,p.Name,HealthStatus,worker_name,result,
+            SELECT JobID,JobTitle,date,location,p.Name,worker_name,result
             FROM CareJob as job 
                 inner join CareWorker as cw on job.workerID=cw.workerID
                 inner join Plants as p on p.PlantID=job.PlantID
-                inner join Monitor as m on m.PlantID=p.PlantID 
         '''
         results=self.careJob.select(CareResult)
         if(results!=None):
@@ -29,16 +28,15 @@ class HigherManager(base_dao):
                         任务日期:%s, 
                         任务地点:%s, 
                         目标植物:%s, 
-                        植物健康状况:%s, 
                         养护人:%s, 
                         完成情况:%s,
                         '''
-                        %(res[0], res[1], res[2], res[3], res[4],res[5],res[6],res[7])) 
+                        %(res[0], res[1], res[2], res[3], res[4],res[5],res[6])) 
                 print()
         else: print("没有找到养护结果信息")
     # ID, Name, Sex, Birth, Tel,create_time,modified_time
     def viewCareWorker(self):
-        results=self.careJob.select_all()
+        results=self.careWorker.select_all()
         if(results!=None):
             for res in results:
                 print('''

@@ -35,6 +35,19 @@ class careJob_dao_Impl(base_dao,careJob_dao):
         # self.conn.commit()
         cursor.close()
 
+    def update_JobStatus(self,id,status)->bool:
+        try:
+            cursor = self.connection.cursor()
+            #插入sql
+            cursor.execute("UPDATE CareJob SET Result=%s WHERE workerID=%s",
+                                    (status,id))
+            # self.conn.commit()
+            cursor.close()
+            return True
+        except:
+            return False
+        
+
     def select(self,sql):
         cursor = self.connection.cursor()
         #插入sql
@@ -51,8 +64,9 @@ class careJob_dao_Impl(base_dao,careJob_dao):
         cursor.execute(
             '''
                 select worker_name 
-                from CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID 
-            ''')
+                from CareWorker as wk inner join CareJob as job on job.workerID=wk.workerID
+                where job.workerID=%s 
+            ''',(id))
         result = cursor.fetchone()
 
         # self.connection.commit()
@@ -339,7 +353,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
     def insert(self,Monitor) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitor values(%s,%s,%s,%s,%s,%s,%s)",(Monitor.resultID,Monitor.HealthStatus,Monitor.name,Monitor.create_time,Monitor.update_time,Monitor.PlantID,Monitor.equipmentID))
+        cursor.execute("insert into Monitor values(%s,%s,%s,%s,%s,%s,%s)",(Monitor.resultID,Monitor.PlantID,Monitor.equipmentID,Monitor.HealthStatus,Monitor.name,Monitor.create_time,Monitor.update_time))
         self.connection.commit()
         cursor.close()
 
