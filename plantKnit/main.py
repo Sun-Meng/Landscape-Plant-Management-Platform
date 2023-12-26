@@ -10,16 +10,6 @@ from plantKnit.user.Admin import *
 from plantKnit.user.HigherManager import *
 from plantKnit.user.MonitorStaff import *
 from plantKnit.user.PlantCarer import * 
-from datetime import datetime
-
-#在这里实现获取用户类---工厂模式
-#根据（id,pwd)去匹配类型
-#生成对应的类（只有养护人员PlantCarer实例化 需要id)
-    #需要
-    #假如是管理员Admin
-    #return Admin()
-    #return 用户类class()
-
 
 print('欢迎来到植物管理平台')
 while(True):
