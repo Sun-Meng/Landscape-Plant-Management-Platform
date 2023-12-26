@@ -113,7 +113,13 @@ class careWorker_dao_Impl(base_dao,careWorker_dao):
         #self.connection.commit()
         cursor.close()
 
-
+    def select_all(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM CareWorker")
+        results = cursor.fetchall()
+        print(pd.DataFrame(list(results)).shape)
+        cursor.close()
+        return results
    
 
 class plant_Family_dao_Impl(base_dao,plant_Family_dao):

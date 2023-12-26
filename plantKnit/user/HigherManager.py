@@ -7,24 +7,50 @@ from db.utils.Factor import *
 class HigherManager(base_dao):
     def __init__(self):
         factory=DaoFactory
-        self.careJob=factory.get_dao("Monitor")
-        self.careWorker=factory.get_dao("Monitoring_Equipment")
+        self.careJob=factory.get_dao("CareJob")
+        self.careWorker=factory.get_dao("CareWorker")
         self.Monitoring_Personnel=factory.get_dao("Monitoring_Personnel")
         self.connection = self.get_conn() 
-    
-    def viewCare(self,id):
-        temp=self.careJob.select(id)
-        if(temp!=None):
-            for i in temp:
-                print(i)
-        else:print("id有误")
-        
-    def viewCareWorker(self,id):
-        temp=self.careWorker.select(id)
-        if(temp!=None):
-            for i in temp:
-                print(i)
-        else:print("id有误")
+     
+    def viewCare(self):
+        CareResult='''
+            SELECT JobID,JobTitle,date,location,p.Name,HealthStatus,worker_name,result,
+            FROM CareJob as job 
+                inner join CareWorker as cw on job.workerID=cw.workerID
+                inner join Plants as p on p.PlantID=job.PlantID
+                inner join Monitor as m on m.PlantID=p.PlantID 
+        '''
+        results=self.careJob.select(CareResult)
+        if(results!=None):
+            for res in results:
+                print('''
+                        任务id:%s ,
+                        任务名称:%s,
+                        任务日期:%s, 
+                        任务地点:%s, 
+                        目标植物:%s, 
+                        植物健康状况:%s, 
+                        养护人:%s, 
+                        完成情况:%s,
+                        '''
+                        %(res[0], res[1], res[2], res[3], res[4],res[5],res[6],res[7])) 
+                print()
+        else: print("没有找到养护结果信息")
+    # ID, Name, Sex, Birth, Tel,create_time,modified_time
+    def viewCareWorker(self):
+        results=self.careJob.select_all()
+        if(results!=None):
+            for res in results:
+                print('''
+                        人员id:%s ,
+                        人员名称:%s,
+                        人员性别:%s, 
+                        人员出生日期:%s, 
+                        人员联系电话:%s, 
+                        '''
+                        %(res[0], res[1], res[2], res[3], res[4])) 
+                print()
+        else: print("没有找到养护人员信息")
         
     def viewMonitoring_Personnel(self,id):
         temp=self.Monitoring_Personnel.select(id)
