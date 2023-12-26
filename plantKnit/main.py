@@ -36,7 +36,7 @@ while(True):
             identity=PlantCarer(userId)
             print(f"养护人员{userId}登录成功！")
         elif workertype.replace(" ","") =='监测人员':
-            identity=MonitorStaff
+            identity=MonitorStaff()
             print(f"监测人员{userId}登录成功！")
         elif workertype.replace(" ","") =='上层主管':
             identity=HigherManager()
@@ -48,7 +48,7 @@ while(True):
         print("登录失败，请检查用户名和密码。")
         print()
    
-    identity.menu #每个用户都有自己的子菜单 
+    identity.menu() #每个用户都有自己的子菜单 
     print('～～主页面～～')
     print('1.登录其它用户')
     print('2.退出系统')

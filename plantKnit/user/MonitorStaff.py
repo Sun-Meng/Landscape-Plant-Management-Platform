@@ -10,7 +10,7 @@ from db.utils.loading import import_csv_to_database
 class MonitorStaff(object):
     def __init__(self):
         factory=DaoFactory()
-        self.Monitor=factory.get_Dao("Monitor")
+        self.Monitor=factory.get_dao("Monitor")
     
     def logging(self):
         # 选择要使用的 DAO 实例和实体类
