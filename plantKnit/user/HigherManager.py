@@ -79,7 +79,7 @@ class HigherManager(base_dao):
             JOIN 
                 Plant_Species ON Plants.SpeciesID = Plant_Species.id
             WHERE 
-                CareJob.PlantID = '%s';
+                CareJob.PlantID = (%s);
             ''', (id,))
         result = cursor.fetchone()
         # 打印结果
