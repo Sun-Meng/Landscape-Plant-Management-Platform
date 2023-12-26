@@ -1,0 +1,4 @@
+PlantID,Name,Alias,MorphologicalFeatures,CultivationKeyPoints,ApplicationValue,PlantIntroduction,Creator,FamilyID,GenusID,SpeciesID,ZoneID,CreationTime, UpdateTime
+1,杨树,老杨,形态像杨树,按杨树习性种,卖杨树苗,是杨树,杨树登记者,1,1,1,1,2023-12-21 11:11:12.000,2023-12-21 11:11:12.000
+2,柏树,老柏,形态像柏树,按柏树习性种,卖柏树苗,是柏树,柏树登记者,2,2,2,2,2023-12-21 11:11:12.000,2023-12-21 11:11:12.000
+3,桐树,老桐,形态像桐树,按桐树习性种,卖桐树苗,是桐树,桐树登记者,3,3,3,3,2023-12-21 11:11:12.000,2023-12-21 11:11:12.000
