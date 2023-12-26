@@ -78,10 +78,10 @@ class Admin(base_dao):
             if(i=="1"):
                 import_csv_to_database("Plants.csv", PlantsDaoImpl(), Plants)
             elif(i=="2"):
-                import_csv_to_database("PlantFamily.csv", plant_Family_dao_Impl(), Plants)
-                import_csv_to_database("PlantGenus.csv", plant_Genus_dao_Impl(), Plants)
-                import_csv_to_database("PlantSpecies.csv", plant_Species_dao_Impl(), Plants)
-                import_csv_to_database("PlantZone.csv", plant_Zone_dao_Impl(), Plants)
+                import_csv_to_database("PlantFamily.csv", plant_Family_dao_Impl(), PlantFamily)
+                import_csv_to_database("PlantGenus.csv", plant_Genus_dao_Impl(), PlantGenus)
+                import_csv_to_database("PlantSpecies.csv", plant_Species_dao_Impl(), PlantSpecies)
+                import_csv_to_database("PlantZone.csv", plant_Zone_dao_Impl(), PlantZone)
             elif(i=="3"):
                 import_csv_to_database("careWorker.csv",careWorker_dao_Impl(), CareWorker)
                 import_csv_to_database("careJob.csv",careJob_dao_Impl(), CareJob)
