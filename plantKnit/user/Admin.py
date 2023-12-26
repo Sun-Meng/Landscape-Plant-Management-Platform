@@ -8,7 +8,7 @@ class Admin(base_dao):
     def __init__(self):
         factor=DaoFactory
         self.plants=factor.get_dao("Plants")
-        self.familys=factor.get_dao("Plant_Family")
+        self.family=factor.get_dao("Plant_Family")
         self.genus=factor.get_dao("Plant_Genus")
         self.species=factor.get_dao("Plant_Species")
         self.zone=factor.get_dao("Plant_Zone")
@@ -119,8 +119,8 @@ class Admin(base_dao):
             elif(i=="3"):
                 self.viewSort(input('植物ID:'))
             elif(i=="4"):
-                plant=Plants(input('植物ID:'),input('植物名:'),input('别名:'),input('形态特征:'),input('栽培技术要点:'),input('应用价值:'),input('植物介绍:'),input('创建人员:'),input('科ID:'),input('属ID:'),input('种ID:'),input('区域ID:'),datetime.now(),datetime.now())
-                self.plant.update(plant)
+                plants=Plants(input('植物ID:'),input('植物名:'),input('别名:'),input('形态特征:'),input('栽培技术要点:'),input('应用价值:'),input('植物介绍:'),input('创建人员:'),input('科ID:'),input('属ID:'),input('种ID:'),input('区域ID:'),datetime.now(),datetime.now())
+                self.plants.update(plants)
             elif(i=="5"):
                 family=PlantFamily(input('科ID:'),input('科名:'),input('科描述:'))
                 self.family.update(family)
