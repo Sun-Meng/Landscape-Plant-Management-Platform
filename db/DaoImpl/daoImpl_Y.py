@@ -250,7 +250,7 @@ class PlantsDaoImpl(base_dao, PlantsDao):
     def insert(self, plant: Plants) -> bool:
         try:
             self.cursor.execute("INSERT INTO Plants VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                                (plant.PlantID,plant.Name,plant.Alias, plant.MorphologicalFeatures, plant.CultivationKeyPoints, plant.ApplicationValue, plant.PlantIntroduction, plant.Creator, plant.FamilyID, plant.GenusID,plant.SpeciesID,plant.ZoneID,plant.CreationTime.now(),plant.UpdateTime))
+                                (plant.PlantID,plant.Name,plant.Alias, plant.MorphologicalFeatures, plant.CultivationKeyPoints, plant.ApplicationValue, plant.PlantIntroduction, plant.Creator, plant.FamilyID, plant.GenusID,plant.SpeciesID,plant.ZoneID,plant.CreationTime,plant.UpdateTime))
             self.connection.commit()
             return True
         except Exception as e:
@@ -287,9 +287,6 @@ class PlantsDaoImpl(base_dao, PlantsDao):
     def selectAll(self):
         self.cursor.execute("SELECT * FROM Plants")
         results = self.cursor.fetchone()
-        #simple_informations = []
-        #for result in results:
-        #    simple_informations.append(Plants(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8],result[9],result[10],result[11],result[12],result[13]))
         return results
 
         
