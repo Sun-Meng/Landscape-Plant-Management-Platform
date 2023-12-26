@@ -1,2 +1,2 @@
-equipmentID,time,place,object
-1,1,1,1
+equipmentID,time,place,object,personID
+1,1,1,1,1
