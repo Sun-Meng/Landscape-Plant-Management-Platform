@@ -59,13 +59,13 @@ class HigherManager(base_dao):
                 Plants.CreationTime,
                 Plants.UpdateTime,
                 Plants.FamilyID,
-                Plant_Family.id AS FamilyID,
+                Plant_Family.PlantID AS FamilyID,
                 Plant_Family.name AS FamilyName,
                 Plant_Family.info AS FamilyInfo,
-                Plant_Genus.id AS GenusID,
+                Plant_Genus.PlantID AS GenusID,
                 Plant_Genus.name AS GenusName,
                 Plant_Genus.info AS GenusInfo,
-                Plant_Species.id AS SpeciesID,
+                Plant_Species.PlantID AS SpeciesID,
                 Plant_Species.name AS SpeciesName,
                 Plant_Species.info AS SpeciesInfo
             FROM 
@@ -75,7 +75,7 @@ class HigherManager(base_dao):
             JOIN 
                 Plant_Family ON CareJob.PlantID = Plant_Family.PlantID
             JOIN 
-                Plant_Genus ON Plants.GenusID = Plant_Genus.id
+                Plant_Genus ON Plants.GenusID = Plant_Genus.PlantID
             JOIN 
                 Plant_Species ON Plants.SpeciesID = Plant_Species.id
             WHERE 
@@ -102,15 +102,15 @@ class HigherManager(base_dao):
                 print('3.结束')
                 j=input('所执行业务ID：')
                 if(j=="1"):
-                    self.viewCareWorker(input('人员ID'))
+                    self.viewCareWorker(input('请输入要查询的人员ID：'))
                 elif(j=="2"):
-                    self.viewMonitoring_Personnel(input('人员ID'))
+                    self.viewMonitoring_Personnel(input('请输入要查询的人员ID：'))
                 elif(j=="3"):
                     break
                 else:
                     print('错误的执行ID')
             elif(i=="3"):
-                self.combineSearch(input('植物ID'))
+                self.combineSearch(input('请输入要查询的植物ID:'))
             elif(i=="4"):
                 break
             else:
