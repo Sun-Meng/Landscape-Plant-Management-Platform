@@ -8,7 +8,7 @@ class Admin(base_dao):
     def __init__(self):
         factor=DaoFactory
         self.plants=factor.get_dao("Plants")
-        self.familys=factor.get_dao("Plant_Family")
+        self.family=factor.get_dao("Plant_Family")
         self.genus=factor.get_dao("Plant_Genus")
         self.species=factor.get_dao("Plant_Species")
         self.zone=factor.get_dao("Plant_Zone")
