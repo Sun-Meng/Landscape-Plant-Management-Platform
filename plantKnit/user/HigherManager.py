@@ -117,7 +117,7 @@ class HigherManager(base_dao):
             print('4.结束')
             i=input('所执行业务ID：')
             if(i=="1"):
-                self.viewCare(input('请输入要查询的任务ID：'))
+                self.viewCare()
             elif(i=="2"):
                 print('-----查看工作人员信息-----')
                 print('1.查看养护人员信息')
@@ -125,7 +125,7 @@ class HigherManager(base_dao):
                 print('3.结束')
                 j=input('所执行业务ID：')
                 if(j=="1"):
-                    self.viewCareWorker(input('请输入要查询的人员ID：'))
+                    self.viewCareWorker()
                 elif(j=="2"):
                     self.viewMonitoring_Personnel(input('请输入要查询的人员ID：'))
                 elif(j=="3"):
