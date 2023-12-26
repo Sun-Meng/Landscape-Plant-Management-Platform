@@ -10,7 +10,7 @@ from db.utils.loading import import_csv_to_database
 class MonitorStaff(object):
     def __init__(self):
         factory=DaoFactory()
-        self.Monitor=factory.get_dao("Monitor")
+        self.Monitor=factory.get_dao#("Monitor")
     
     def logging(self):
         # 选择要使用的 DAO 实例和实体类
@@ -18,7 +18,7 @@ class MonitorStaff(object):
         entity_class = Monitor  # 可根据需求选择其他实体类
 
         data_list = []
-        header = "resultID,PlantID,equipmentID,HealthStatus,name,create_time,update_time"
+        header = "resultID,name,create_time,update_time"
         print(f"请按照以下格式逐行输入数据（输入 'quit' 结束录入）:\n{header}")
 
         while True:
@@ -54,9 +54,9 @@ class MonitorStaff(object):
             print('3.结束')
             i=input('所执行业务ID:')
             if(i=="1"):
-                self.logging(input('请输入数据'))
+                self.logging()
             elif(i=="2"):
-                self.loading(input('%s'))
+                self.loading()
             elif(i=="3"):
                 break
             else:
