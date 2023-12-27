@@ -67,10 +67,15 @@ class Admin(base_dao):
         cursor.execute("SELECT name FROM Plant_Family WHERE id = %s", (family_id))
         result =cursor.fetchone()
         view_name="Family_"+result[0] if result else print("Erro ID")
-        cursor.execute("CREATE VIEW "+view_name+" AS SELECT * FROM Plants WHERE FamilyID = %s", (family_id))
+        cursor.execute(f"SELECT name FROM master WHERE type='view' AND name='{view_name}'")
+        result = cursor.fetchone()
+        if not result:
+            cursor.execute(f"CREATE VIEW {view_name} AS SELECT * FROM Plants")
+            cursor.execute("CREATE VIEW "+view_name+" AS SELECT * FROM Plants WHERE FamilyID = %s", (family_id))
         cursor.execute("SELECT COUNT(*) FROM "+view_name, (family_id))
         result = cursor.fetchone()
         print(result) if result[0] else print("None")
+        
     def query_plants_by_attributes(self, attributes):
         cursor = self.connection.cursor()
         query = "SELECT * FROM Plants WHERE " + " AND ".join(f"{key} = %s" for key in attributes.keys())
