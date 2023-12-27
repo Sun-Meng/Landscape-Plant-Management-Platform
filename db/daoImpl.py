@@ -375,7 +375,21 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
         result = cursor.fetchall()
         cursor.close()
         return result
+    
+    def calculate_average_result_id(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT AVG(resultID) FROM Monitor;")
+        result = cursor.fetchone()
+        cursor.close()
+        return result[0] if result and result[0] is not None else None
 
+    def find_max_result_id(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT MAX(resultID) FROM Monitor;")
+        result = cursor.fetchone()
+        cursor.close()
+        return result[0] if result and result[0] is not None else None
+        
 
 class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
     

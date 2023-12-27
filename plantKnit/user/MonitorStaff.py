@@ -43,19 +43,42 @@ class MonitorStaff(object):
     
         # 调用通用函数
         import_csv_to_database(csv_filename, dao_instance, entity_class)
+        
+    def query_average_result_id(self):
+        dao_instance = Monitor_dao_Impl()
+        average_result_id = dao_instance.calculate_average_result_id()
+        if average_result_id is not None:
+            print(f"监测表的数据中resultID的平均值为: {average_result_id}")
+        else:
+            print("无法计算平均值，数据为空或不可用")
+
+    def query_max_result_id(self):
+        dao_instance = Monitor_dao_Impl()
+        max_result_id = dao_instance.find_max_result_id()
+        if max_result_id is not None:
+            print(f"监测表的数据中resultID的最大值为: {max_result_id}")
+        else:
+            print("无法找到最大值，数据为空或不可用")
+
     
     def menu(self):
         while(True):
             print('-----监测人员界面-----')
             print('1.手工录入数据')
             print('2.批量导入数据')
-            print('3.结束')
+            print('3.查询监测表的数据中resultID的平均值')
+            print('4.查询监测表的数据中resultID的最大值')
+            print('5.结束')
             i=input('所执行业务ID:')
             if(i=="1"):
                 self.logging()
             elif(i=="2"):
                 self.loading()
-            elif(i=="3"):
-                break
+            elif i == "3":
+                self.query_average_result_id()
+            elif i == "4":
+                self.query_max_result_id()
+            elif(i=="5"):
+                    break
             else:
                 print('错误的执行ID')
