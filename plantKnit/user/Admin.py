@@ -66,12 +66,9 @@ class Admin(base_dao):
         cursor = self.connection.cursor()
         cursor.execute("SELECT name FROM Plant_Family WHERE id = %s", (family_id))
         result =cursor.fetchone()
-        view_name=result[0]+"Plants_in_Family" if result else print("Erro ID")
-        cursor.execute("SELECT name FROM LPIM WHERE type='view' AND name=%s",(view_name))
-        result = cursor.fetchone()
-        if not result:
-            cursor.execute("CREATE VIEW "+view_name+" AS SELECT * FROM Plants WHERE FamilyID = %s", (family_id))
-            cursor.execute("SELECT COUNT(*) FROM "+view_name, (family_id))
+        view_name="Family_"+result[0] if result else print("Erro ID")
+        cursor.execute("CREATE VIEW "+view_name+" AS SELECT * FROM Plants WHERE FamilyID = %s", (family_id))
+        cursor.execute("SELECT COUNT(*) FROM "+view_name, (family_id))
         result = cursor.fetchone()
         print(result) if result[0] else print("None")
     def query_plants_by_attributes(self, attributes):
