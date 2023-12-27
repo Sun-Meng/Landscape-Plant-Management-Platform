@@ -62,6 +62,19 @@ class Admin(base_dao):
         self.species.update(species)
     def updateZone(self,zone):
         self.zone.update(zone)
+    def count_plants_by_family_id(self, family_id):
+        cursor = self.connection.cursor()
+        cursor.execute("CREATE VIEW IF NOT EXISTS Plants_in_Family AS SELECT * FROM Plants WHERE FamilyID = %s", (family_id,))
+        cursor.execute("SELECT COUNT(*) FROM Plants_in_Family", (family_id,))
+        result = cursor.fetchone()
+        print(result) if result[0] else print("None")
+    def query_plants_by_attributes(self, attributes):
+        cursor = self.connection.cursor()
+        query = "SELECT * FROM Plants WHERE " + " AND ".join(f"{key} = %s" for key in attributes.keys())
+        values = tuple(attributes.values())
+        cursor.execute(query, values)
+        results = cursor.fetchall()
+        print(results)
     def setConfigInfo(self):
          while(True):
             print('-----系统信息配置界面-----')
@@ -110,7 +123,9 @@ class Admin(base_dao):
             print('7.修改种信息')
             print('8.修改区域信息')
             print('9.系统信息配置')
-            print('10.结束')
+            print('10.查询科内植物数量')
+            print('11.根据任意属性查询符合的植物信息')
+            print('12.结束')
             i=input('所执行业务ID:')
             if(i=="1"):
                 self.viewPlant(input('植物ID:'))
@@ -152,6 +167,24 @@ class Admin(base_dao):
             elif(i=="9"):
                 self.setConfigInfo()
             elif(i=="10"):
+                self.count_plants_by_family_id(input("科ID："))
+            elif(i=="11"):
+                attributes = {}
+                attribute_names = ['PlantID', 'Name', 'Alias', 'MorphologicalFeatures', 'CultivationKeyPoints', 'ApplicationValue', 'PlantIntroduction', 'Creator', 'CreationTime', 'UpdateTime', 'FamilyID', 'GenusID', 'SpeciesID', 'ZoneID']
+                while True:
+                    print("请选择一个属性：")
+                    for i, attribute_name in enumerate(attribute_names):
+                        if attribute_name in attributes:
+                            continue
+                        print(f"{i}. {attribute_name}")
+                    attribute_index = input("请输入属性的序号（输入'q'结束输入）：")
+                    if attribute_index.lower() == 'q':
+                        break
+                    attribute_name = attribute_names[int(attribute_index)]
+                    attribute_value = input(f"请输入属性'{attribute_name}'的值：")
+                    attributes[attribute_name] = attribute_value
+                self.query_plants_by_attributes(attributes)
+            elif(i=="12"):
                 break
             else:
                 print('错误的执行ID')
