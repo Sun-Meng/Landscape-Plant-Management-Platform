@@ -61,7 +61,7 @@ class User(object):
         self.type=type
         
 class Monitor(object):
-    def __init__(self, resultID, PlantID, equipmentID, HealthStatus, name, create_time, update_time):
+    def __init__(self, resultID, PlantID, equipmentID, HealthStatus, name, create_time, update_time,temp,acid):
         self.resultID = resultID
         self.PlantID = PlantID
         self.equipmentID = equipmentID
@@ -69,6 +69,8 @@ class Monitor(object):
         self.name = name
         self.create_time = create_time
         self.update_time = update_time
+        self.temp = temp
+        self.acid = acid
         
         
     def get_resultID(self):
@@ -85,6 +87,12 @@ class Monitor(object):
     
     def get_update_time(self):
         return self.update_time
+    
+    def get_temp(self):
+        return self.temp
+    
+    def get_acid(self):
+        return self.acid
     
     def get_PlantID(self):
         return self.PlantID

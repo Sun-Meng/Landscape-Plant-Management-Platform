@@ -353,7 +353,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
 
     def insert(self,Monitor) :
         cursor = self.connection.cursor()
-        cursor.execute("insert into Monitor values(%s,%s,%s,%s,%s,%s,%s)",(Monitor.resultID,Monitor.PlantID,Monitor.equipmentID,Monitor.HealthStatus,Monitor.name,Monitor.create_time,Monitor.update_time))
+        cursor.execute("insert into Monitor values(%s,%s,%s,%s,%s,%s,%s,%s,%s)",(Monitor.resultID,Monitor.PlantID,Monitor.equipmentID,Monitor.HealthStatus,Monitor.name,Monitor.create_time,Monitor.update_time,Monitor.temp,Monitor.acid))
         self.connection.commit()
         cursor.close()
 
@@ -365,7 +365,7 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
     
     def update(self,Monitor):
         cursor = self.connection.cursor()
-        cursor.execute("update Monitor set HealthStatus = %s, name = %s, create_time = %s, update_time = %s, PlantID = %s, equipmentID = %s where resultID = %s",(Monitor.HealthStatus, Monitor.name, Monitor.create_time, Monitor.update_time, Monitor.PlantID, Monitor.equipmentID, Monitor.resultID))
+        cursor.execute("update Monitor set HealthStatus = %s, name = %s, create_time = %s, update_time = %s, temp = %s, acid = %s, PlantID = %s, equipmentID = %s where resultID = %s",(Monitor.HealthStatus, Monitor.name, Monitor.create_time, Monitor.update_time, Monitor.temp, Monitor.acid, Monitor.PlantID, Monitor.equipmentID, Monitor.resultID))
         self.connection.commit()
         cursor.close()
 
@@ -376,20 +376,47 @@ class Monitor_dao_Impl(base_dao,Monitor_dao):
         cursor.close()
         return result
     
-    def calculate_average_result_id(self):
+    def calculate_average_temp(self):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT AVG(resultID) FROM Monitor;")
+        cursor.execute("SELECT AVG(temp) FROM Monitor;")
         result = cursor.fetchone()
         cursor.close()
         return result[0] if result and result[0] is not None else None
 
-    def find_max_result_id(self):
+    def find_max_temp(self):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT MAX(resultID) FROM Monitor;")
+        cursor.execute("SELECT MAX(temp) FROM Monitor;")
         result = cursor.fetchone()
         cursor.close()
         return result[0] if result and result[0] is not None else None
         
+    def find_min_temp(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT MIN(temp) FROM Monitor;")
+        result = cursor.fetchone()
+        cursor.close()
+        return result[0] if result and result[0] is not None else None
+    
+    def calculate_average_acid(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT AVG(acid) FROM Monitor;")
+        result = cursor.fetchone()
+        cursor.close()
+        return result[0] if result and result[0] is not None else None
+
+    def find_max_acid(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT MAX(acid) FROM Monitor;")
+        result = cursor.fetchone()
+        cursor.close()
+        return result[0] if result and result[0] is not None else None
+        
+    def find_min_acid(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT MIN(acid) FROM Monitor;")
+        result = cursor.fetchone()
+        cursor.close()
+        return result[0] if result and result[0] is not None else None
 
 class Monitoring_Equipment_dao_Impl(base_dao,Monitoring_Equipment_dao):
     
