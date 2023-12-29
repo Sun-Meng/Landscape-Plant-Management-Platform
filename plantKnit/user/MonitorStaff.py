@@ -16,7 +16,7 @@ class MonitorStaff(object):
         entity_class = Monitor  # 可根据需求选择其他实体类
 
         data_list = []
-        header = "resultID,PlantID,equipmentID,HealthStatus,name,create_time,update_time"
+        header = "resultID,PlantID,equipmentID,HealthStatus,name,create_time,update_time,temp,acid"
         print(f"请按照以下格式逐行输入数据（输入 'quit' 结束录入）:\n{header}")
 
         while True:
@@ -44,19 +44,51 @@ class MonitorStaff(object):
         # 调用通用函数
         import_csv_to_database(csv_filename, dao_instance, entity_class)
         
-    def query_average_result_id(self):
+    def query_average_temp(self):
         dao_instance = Monitor_dao_Impl()
-        average_result_id = dao_instance.calculate_average_result_id()
-        if average_result_id is not None:
-            print(f"监测表的数据中resultID的平均值为: {average_result_id}")
+        average = dao_instance.calculate_average_temp()
+        if average is not None:
+            print(f"平均值为: {average}")
         else:
             print("无法计算平均值，数据为空或不可用")
 
-    def query_max_result_id(self):
+    def query_max_temp(self):
         dao_instance = Monitor_dao_Impl()
-        max_result_id = dao_instance.find_max_result_id()
-        if max_result_id is not None:
-            print(f"监测表的数据中resultID的最大值为: {max_result_id}")
+        max = dao_instance.find_max_temp()
+        if max is not None:
+            print(f"最大值为: {max}")
+        else:
+            print("无法找到最大值，数据为空或不可用")
+            
+    def query_min_temp(self):
+        dao_instance = Monitor_dao_Impl()
+        min = dao_instance.find_min_temp()
+        if min is not None:
+            print(f"最小值为: {min}")
+        else:
+            print("无法找到最大值，数据为空或不可用")
+            
+    def query_average_acid(self):
+        dao_instance = Monitor_dao_Impl()
+        average = dao_instance.calculate_average_acid()
+        if average is not None:
+            print(f"平均值为: {average}")
+        else:
+            print("无法计算平均值，数据为空或不可用")
+
+    def query_max_acid(self):
+        dao_instance = Monitor_dao_Impl()
+        max = dao_instance.find_max_acid()
+        if max is not None:
+            print(f"最大值为: {max}")
+        else:
+            print("无法找到最大值，数据为空或不可用")
+            
+    def query_min_acid(self):
+        dao_instance = Monitor_dao_Impl()
+        min = dao_instance.find_min_acid()
+        if min is not None:
+            print(f"最小值为: {min}")
         else:
             print("无法找到最大值，数据为空或不可用")
 
@@ -66,8 +98,8 @@ class MonitorStaff(object):
             print('-----监测人员界面-----')
             print('1.手工录入数据')
             print('2.批量导入数据')
-            print('3.查询监测表的数据中resultID的平均值')
-            print('4.查询监测表的数据中resultID的最大值')
+            print('3.查询监测表的数据中植物温度的平均值，最大值，最小值')
+            print('4.查询监测表的数据中土壤酸度的平均值，最大值，最小值')
             print('5.结束')
             i=input('所执行业务ID:')
             if(i=="1"):
@@ -75,9 +107,13 @@ class MonitorStaff(object):
             elif(i=="2"):
                 self.loading()
             elif i == "3":
-                self.query_average_result_id()
+                self.query_average_temp()
+                self.query_max_temp()
+                self.query_min_temp()
             elif i == "4":
-                self.query_max_result_id()
+                self.query_average_acid()
+                self.query_max_acid()
+                self.query_min_acid()
             elif(i=="5"):
                     break
             else:
