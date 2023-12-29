@@ -768,7 +768,7 @@ class PlantsDaoImpl(base_dao, PlantsDao):
         
     def selectAll(self):
         self.cursor.execute("SELECT * FROM Plants")
-        results = self.cursor.fetchone()
+        results = self.cursor.fetchall()
         return results
 
         
