@@ -11,13 +11,15 @@ class MonitorStaff(object):
         self.Monitor=factory.get_dao("Monitor")
     
     def logging(self):
-        # 选择要使用的 DAO 实例和实体类
-        dao_instance = Monitor_dao_Impl()  # 可根据需求选择其他实例
-        entity_class = Monitor  # 可根据需求选择其他实体类
+        dao_instance = Monitor_dao_Impl()
+        entity_class = Monitor
 
         data_list = []
         header = "resultID,PlantID,equipmentID,HealthStatus,name,create_time,update_time,temp,acid"
         print(f"请按照以下格式逐行输入数据（输入 'quit' 结束录入）:\n{header}")
+
+        # 存储异常数据的列表
+        invalid_data_list = []
 
         while True:
             input_data = input("请输入数据：")
@@ -29,12 +31,30 @@ class MonitorStaff(object):
         for data in data_list:
             # 分割输入的数据为列表
             data_as_list = data.split(',')
-        
+
             # 使用可变数量的参数传递给实体类的构造函数
             entity_instance = entity_class(*data_as_list)
-            dao_instance.insert(entity_instance)
 
-        print("手动输入的数据导入数据库成功")
+            # 检查temp和acid是否在指定范围内
+            temp_valid = -273 <= float(entity_instance.temp) <= 1000
+            acid_valid = 0 <= float(entity_instance.acid) <= 14
+
+            if not temp_valid or not acid_valid:
+                # 存储异常数据到列表
+                invalid_data_list.append(data)
+                # 输出存储失败的消息
+                print("存储失败：输入数据超出范围")
+            else:
+                # 数据符合范围，将数据插入数据库
+                dao_instance.insert(entity_instance)
+                print("手动输入的数据导入数据库成功")
+
+            if invalid_data_list:
+                with open("error.txt", "w") as file:
+                    file.write("以下数据超出范围，未存入数据库：\n")
+                    for invalid_data in invalid_data_list:
+                        file.write(invalid_data + "\n")
+                print("异常数据已存储到文件 error.txt 中")
     
     def loading(self):
         dao_instance = Monitor_dao_Impl()
@@ -114,7 +134,7 @@ class MonitorStaff(object):
                 self.query_average_acid()
                 self.query_max_acid()
                 self.query_min_acid()
-            elif(i=="5"):
+            elif i == "5":
                     break
             else:
                 print('错误的执行ID')
