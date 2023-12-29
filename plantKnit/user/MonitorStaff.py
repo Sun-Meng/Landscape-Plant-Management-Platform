@@ -48,13 +48,18 @@ class MonitorStaff(object):
                 # 数据符合范围，将数据插入数据库
                 dao_instance.insert(entity_instance)
                 print("手动输入的数据导入数据库成功")
-
+            
             if invalid_data_list:
-                with open("error.txt", "w") as file:
+            # 拼接上级文件夹的log文件夹路径
+                log_folder_path = "../log"
+                error_file_path = f"{log_folder_path}/error.txt"
+
+                with open(error_file_path, "w") as file:
                     file.write("以下数据超出范围，未存入数据库：\n")
                     for invalid_data in invalid_data_list:
                         file.write(invalid_data + "\n")
                 print("异常数据已存储到文件 error.txt 中")
+
     
     def loading(self):
         dao_instance = Monitor_dao_Impl()
