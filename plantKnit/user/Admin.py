@@ -64,16 +64,17 @@ class Admin(base_dao):
         self.zone.update(zone)
     def count_plants_by_family_id(self, family_id):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT name FROM Plant_Family WHERE id = ?", (family_id,))
+        cursor.execute("SELECT name FROM Plant_Family WHERE id = %s", (family_id))
         result =cursor.fetchone()
         view_name=result[0]+"Plants_in_Family" if result else print("Erro ID")
-        cursor.execute("SELECT name FROM LPIM WHERE type='view' AND name=%s",(view_name,))
+        cursor.execute("SELECT name FROM LPIM WHERE type='view' AND name=%s",(view_name))
         result = cursor.fetchone()
         if not result:
-            cursor.execute("CREATE VIEW "+view_name+" AS SELECT * FROM Plants WHERE FamilyID = %s", (family_id,))
-            cursor.execute("SELECT COUNT(*) FROM "+view_name, (family_id,))
+            cursor.execute("CREATE VIEW "+view_name+" AS SELECT * FROM Plants WHERE FamilyID = %s", (family_id))
+            cursor.execute("SELECT COUNT(*) FROM "+view_name, (family_id))
         result = cursor.fetchone()
         print(result) if result[0] else print("None")
+
     def query_plants_by_attributes(self, attributes):
         cursor = self.connection.cursor()
         query = "SELECT * FROM Plants WHERE " + " AND ".join(f"{key} = %s" for key in attributes.keys())
@@ -173,7 +174,7 @@ class Admin(base_dao):
             elif(i=="9"):
                 self.setConfigInfo()
             elif(i=="10"):
-                self.count_plants_by_family_id(input("科ID："))
+                self.count_plants_by_family_id(input("科ID:"))
             elif(i=="11"):
                 attributes = {}
                 attribute_names = ['PlantID', 'Name', 'Alias', 'MorphologicalFeatures', 'CultivationKeyPoints', 'ApplicationValue', 'PlantIntroduction', 'Creator', 'CreationTime', 'UpdateTime', 'FamilyID', 'GenusID', 'SpeciesID', 'ZoneID']

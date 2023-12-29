@@ -14,7 +14,7 @@ class base_dao(dao):  # 具体实现类
     _conn = None
     
     def get_conn(self):
-        self._conn = pymssql.connect(server='localhost', database="LPIM",autocommit=True) #DESKTOP-MTS8V3O
+        self._conn = pymssql.connect(server='localhost', database="LPIM",autocommit=True)
         return self._conn
     
     def close_conn(self):
